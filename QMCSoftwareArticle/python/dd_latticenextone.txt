@@ -1,0 +1,5 @@
+>>> lattice.gen_samples(2)
+array([[0.15700854, 0.41080809],
+       [0.65700854, 0.91080809]])
+>>> lattice.gen_samples(n_min=1,n_max=2)
+array([[0.65700854, 0.91080809]])

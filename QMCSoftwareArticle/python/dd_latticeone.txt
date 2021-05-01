@@ -1,0 +1,4 @@
+>>> lattice = qp.Lattice(2); lattice.gen_samples(1)
+array([[0.15700854, 0.41080809]])
+>>> lattice.gen_samples(1)
+array([[0.15700854, 0.41080809]])

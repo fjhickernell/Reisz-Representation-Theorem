@@ -1,0 +1,11 @@
+>>> bm = qp.BrownianMotion(qp.Sobol(4), t_final=2, drift=2)
+>>> bm # print(bm)
+BrownianMotion (TrueMeasure Object)
+    time_vec        [0.5 1.  1.5 2. ]
+    drift           2^(1)
+    mean            [1. 2. 3. 4.]
+    covariance      [[0.5 0.5 0.5 0.5]
+                    [0.5  1.  1.  1. ]
+                    [0.5  1.  1.5 1.5]
+                    [0.5  1.  1.5 2. ]]
+    decomp_type     pca

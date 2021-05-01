@@ -1,0 +1,10 @@
+>>> # default transform
+>>> keister = qp.Keister(qp.Halton(2))
+>>> x = keister.discrete_distrib.gen_samples(1e4)
+>>> keister.f(x).mean()
+1.8082700897855786
+>>> # custom transform for importance sampling 
+>>> keister = qp.Keister(sampler=qp.Gaussian(qp.Halton(2)))
+>>> x = keister.discrete_distrib.gen_samples(1e4)
+>>> keister.f(x).mean()
+1.807929542158969

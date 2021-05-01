@@ -1,0 +1,11 @@
+>>> def my_Keister(t):
+...     d = t.shape[1] # t is an (n x d) array
+...     norm = np.sqrt((t**2).sum(1))
+...     out = np.pi**(d/2)*np.cos(norm)
+...     return out  # size n vector
+>>> gauss = qp.Gaussian(qp.Halton(2),covariance=1/2)
+>>> keister = qp.CustomFun(true_measure=gauss,g=my_Keister)
+>>> x = keister.discrete_distrib.gen_samples(1000) 
+>>> y = keister.f(x)
+>>> y.mean()
+1.8068921077383129

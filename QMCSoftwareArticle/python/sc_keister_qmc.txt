@@ -1,0 +1,27 @@
+>>> keister = qp.Keister(qp.Sobol(2))
+>>> stopping = qp.CubQMCSobolG(keister,abs_tol=1e-3)
+>>> solution_qmc,data_qmc = stopping.integrate()
+>>> data_qmc # equivalent to print(data_qmc)
+Solution: 1.8083         
+Keister (Integrand Object)
+Sobol (DiscreteDistribution Object)
+    d               2^(1)
+    randomize       1
+    graycode        0
+    seed            194061
+    mimics          StdUniform
+    dim0            0
+Gaussian (TrueMeasure Object)
+    mean            0
+    covariance      2^(-1)
+    decomp_type     pca
+CubQMCSobolG (StoppingCriterion Object)
+    abs_tol         0.001
+    rel_tol         0
+    n_init          2^(10)
+    n_max           2^(35)
+LDTransformData (AccumulateData Object)
+    n_total         2^(13)
+    solution        1.808
+    error_bound     6.37e-04
+    time_integrate  0.009

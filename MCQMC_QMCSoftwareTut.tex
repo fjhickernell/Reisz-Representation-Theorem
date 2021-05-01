@@ -1,0 +1,198 @@
+%Talk given virtually for SIAM UQ 2020 March
+\documentclass[10pt,compress,xcolor={usenames,dvipsnames},aspectratio=169]{beamer}
+%\documentclass[xcolor={usenames,dvipsnames},aspectratio=169]{beamer} %slides and 
+%notes
+\usepackage{amsmath,
+	amssymb,
+	datetime,
+	mathtools,
+	bbm,
+	%mathabx,
+	array,
+	booktabs,
+	xspace,
+	multirow,
+	calc,
+	colortbl,
+	siunitx,
+ 	graphicx}
+\usepackage[usenames]{xcolor}
+\usepackage[giveninits=false,backend=biber,style=nature, maxcitenames =10, mincitenames=9]{biblatex}
+\addbibresource{FJHown23.bib}
+\addbibresource{FJH23.bib}
+\usepackage{newpxtext}
+\usepackage[euler-digits,euler-hat-accent]{eulervm}
+\usepackage{media9}
+\usepackage[autolinebreaks]{mcode}
+\usepackage[tikz]{mdframed}
+
+
+\usetheme{FJHSlimNoFoot169}
+\setlength{\parskip}{2ex}
+\setlength{\arraycolsep}{0.5ex}
+
+\DeclareMathOperator{\sol}{SOL}
+\DeclareMathOperator{\app}{APP}
+\DeclareMathOperator{\alg}{ALG}
+\DeclareMathOperator{\ACQ}{ACQ}
+\DeclareMathOperator{\ERR}{ERR}
+\DeclareMathOperator{\COST}{COST}
+\DeclareMathOperator{\COMP}{COMP}
+\newcommand{\dataN}{\bigl(\hf(\vk_i)\bigr)_{i=1}^n}
+\newcommand{\dataNj}{\bigl(\hf(\vk_i)\bigr)_{i=1}^{n_j}}
+\newcommand{\dataNjd}{\bigl(\hf(\vk_i)\bigr)_{i=1}^{n_{j^\dagger}}}
+\newcommand{\ERRN}{\ERR\bigl(\dataN,n\bigr)}
+
+\newcommand{\Sapp}{S_{\textup{app}}}
+\newcommand{\LambdaStd}{\Lambda^{\textup{std}}}
+\newcommand{\LambdaSer}{\Lambda^{\textup{ser}}}
+\newcommand{\LambdaAll}{\Lambda^{\textup{all}}}
+\newcommand{\oton}{1\!:\!n}
+\newcommand{\talert}[1]{\alert{\text{#1}}}
+\DeclareMathOperator{\init}{init}
+\DeclareMathOperator{\GP}{\cg\cp}
+\newcommand{\MLE}{\textup{EB}}
+\newcommand{\mCtheta}{{\mathsf{C}_{\vtheta}}}
+\newcommand{\mCInv}{\mathsf{C}^{-1}}
+\newcommand{\tvg}{\widetilde{\vg}}
+
+%\DeclareMathOperator{\app}{app}
+
+\providecommand{\HickernellFJ}{H.\xspace}
+
+
+\iffalse
+
+\fi
+
+\renewcommand{\OffTitleLength}{-7ex}
+\setlength{\FJHThankYouMessageOffset}{-8ex}
+\title{The Reisz Representation Theorem}
+\author[]{Fred J. Hickernell}
+\institute{Department of Applied Mathematics \&
+	Center for Interdisciplinary Scientific Computation \\  Illinois Institute of Technology \quad
+	\href{mailto:hickernell@iit.edu}{\url{hickernell@iit.edu}} \quad
+	\href{http://mypages.iit.edu/~hickernell}{\url{mypages.iit.edu/~hickernell}}}
+
+\thanksnote{Thanks to the Illinois Tech Student Chapter for the invitation}
+	
+\event{My Favorite Theorem}
+\date[]{???, 2021}
+
+\input FJHDef.tex
+
+
+\newlength{\figwidth}
+\setlength{\figwidth}{0.25\textwidth}
+
+\newlength{\figwidthSmall}
+\setlength{\figwidthSmall}{0.2\textwidth}
+
+\newcommand{\financePict}{\href{http://i2.cdn.turner.com/money/dam/assets/130611131918-chicago-board-options-exchange-1024x576.jpg}{\includegraphics[width
+		= 3cm]{ProgramsImages/130611131918-chicago-board-options-exchange-1024x576.jpg}}}
+	
+	\newcommand{\scoop}[1]{\parbox{#1}{\includegraphics[width=#1]{IceCreamScoop.eps}}\xspace}
+	\newcommand{\smallscoop}{\scoop{1cm}}
+	\newcommand{\medscoop}{\scoop{1.8cm}}
+	\newcommand{\largescoop}{\scoop{3cm}}
+	\newcommand{\ICcone}[1]{\parbox{#1}{\includegraphics[width=#1,angle=270]{MediumWaffleCone.eps}}\xspace}
+	\newcommand{\medcone}{\ICcone{1.2cm}}
+	\newcommand{\largercone}{\parbox{2.2cm}{\vspace*{-0.2cm}\includegraphics[width=1cm,angle=270]{MediumWaffleCone.eps}}\xspace}
+	\newcommand{\largecone}{\ICcone{1.8cm}}
+	\newcommand{\smallcone}{\parbox{1.1cm}{\includegraphics[width=0.5cm,angle=270]{MediumWaffleCone.eps}}\xspace}
+
+	
+
+\newcommand{\northeaststuff}[3]{
+	\begin{tikzpicture}[remember picture, overlay]
+	\node [shift={(-#1 cm,-#2 cm)}]  at (current page.north east){#3};
+	\end{tikzpicture}}
+
+
+\begin{document}
+	\tikzstyle{every picture}+=[remember picture]
+	\everymath{\displaystyle}
+
+\frame{\titlepage}
+
+
+\section{Background}
+
+\begin{frame}{Main Idea}
+    What seems \alert{obvious} for $d$-dimensional vectors becomes a power tool for \alert{numerical analysis}
+    
+    \begin{description}
+    \item[Obvious]<2-> If $L: \reals^3 \to \reals$ is a \alert{linear} functional, then we can represent $L(f)$ as an \alert{inner product}:
+    \[
+    L(\vf) = g_1 f_1 + g_2 f_2 + g_3 f_3 = \vg^T \vf =: \ip{\vg}{\vf} \quad \forall \vf \in \reals^3, \qquad \text{where $\vg \in \reals^3$ is fixed}
+    \]
+   ``linear'' means that $L(c\vf + \vh) = c L(\vf) + L(\vh)$ 
+   \item[Powerful Tool]<3-> The generalization of this idea allows us to derive error bounds for numerical algorithms such as
+   \[
+   \abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) } \le \text{bad}(\vx_1, \ldots, \vx_n) \, \text{bad}(\vf)
+   \]
+    \end{description}
+\end{frame}
+
+\begin{frame}{Riesz Representation Theorem for $R^d$}
+\begin{theorem}
+    If $L: \reals^d \to \reals$ is any linear functional, and $\ip{\vf}{\vh} : = \vf^T \vh$, then there exists a unique $\vg \in \reals^d$, dependent on $L$, for which $L(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^d$
+\end{theorem}
+\begin{proof}
+\alert{Existence.} Let $\ve_j = (0, \ldots, \underbrace{1}_{j^{\text{th}} \text{ position}}, 0, \ldots, 0)^T$.  Then for all $\vf = (f_1, \ldots, f_d)^T$,
+    \begin{align*}
+    L(\vf) &= L\bigl( \ve_1 f_1 + \cdots + \ve_d f_d \bigr)  = L(\ve_1) f_1 + \cdots + L(\ve_d) f_d \qquad \text{by linearlity} \\
+    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( L(\ve_1), \ldots, L(\ve_d) \bigr)^T
+    \end{align*}
+\alert{Uniqueness.} If $L(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
+\[
+0 = L(\vg - \tvg) - L(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
+\]
+so $\vg - \tvg = \vzero$ and $\vg = \tvg$.
+\end{proof}
+    
+\end{frame}
+
+
+\begin{frame}{Riesz Representation Theorem for $\reals^d$, Alternative Proof}
+\begin{theorem}
+    If $L: \reals^d \to \reals$ is any linear functional, and $\ip{\vf}{\vh} : = \vf^T \vh$, then there exists a unique $\vg \in \reals^d$, dependent on $L$, for which $L(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^d$
+\end{theorem}
+\begin{proof}
+\alert{Existence.} Let $\mK$ be the $d$-dimensional identity matrix and let $\vK_j \in \reals^d$ denote its $j^{\text{th}}$ column.  Note that 
+\[
+f_j = \ip{\vK_j}{\vf} \qquad \forall \vf \in \reals^d.
+\]
+Now define $\vg \in \reals^d$ by $g_j = L(\vK_j)$.
+Then for all $\vf = (f_1, \ldots, f_d)^T$,
+    \begin{align*}
+    L(\vf) &= L\bigl( \ve_1 f_1 + \cdots + \ve_d f_d \bigr)  = L(\ve_1) f_1 + \cdots + L(\ve_d) f_d \qquad \text{by linearlity} \\
+    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( L(\ve_1), \ldots, L(\ve_d) \bigr)^T
+    \end{align*}
+\alert{Uniqueness.} If $L(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
+\[
+0 = L(\vg - \tvg) - L(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
+\]
+so $\vg - \tvg = \vzero$ and $\vg = \tvg$.
+\end{proof}
+    
+\end{frame}
+
+\end{document}
+
+
+
+\finalthanksnote{These slides are  available at \\  \href{https://speakerdeck.com/fjhickernell/quasi-monte-carlo-software}{\nolinkurl{speakerdeck.com/fjhickernell/quasi-monte-carlo-software}}\\
+Google Colaboratory notebook at \href{https://tinyurl.com/QMCPyTutorial}{\nolinkurl{tinyurl.com/QMCPyTutorial}}\\
+Blog at \href{https://qmcpy.wordpress.com/}{\nolinkurl{qmcpy.wordpress.com/}}}
+
+
+\thankyouframe
+
+
+\end{document}
+
+
+
+
+

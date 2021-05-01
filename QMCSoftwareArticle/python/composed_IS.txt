@@ -1,0 +1,14 @@
+>>> sobol = qp.Sobol(1)
+>>> K = qp.Keister(sobol)
+>>> K_gauss = qp.Keister(
+...     qp.Gaussian(sobol,covariance=.75))
+>>> K_gauss_kuma = qp.Keister(
+...     qp.Gaussian(
+...         qp.Kumaraswamy(sobol,a=.8,b=.8)))
+>>> for this_K in [K,K_gauss,K_gauss_kuma]:
+...     stopper = qp.CubQMCSobolG(this_K,abs_tol=5e-8)
+...     sol,data = stopper.integrate()
+...     print("Time: %.3f"%data.time_integrate)
+Time: 2.023
+Time: 0.350
+Time: 0.071

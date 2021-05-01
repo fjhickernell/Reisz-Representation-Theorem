@@ -1,0 +1,10 @@
+>>> def my_L_Keister(t):
+...     norm_sq = (t**2).sum(1)
+...     out = np.cos(np.sqrt(norm_sq))*np.exp(-norm_sq)
+...     return out
+>>> lebesgue_gauss = qp.Lebesgue(qp.Gaussian(qp.Halton(2)))
+>>> keister = qp.CustomFun(lebesgue_gauss,my_L_Keister)
+>>> x = keister.discrete_distrib.gen_samples(1000)
+>>> y = keister.f(x)
+>>> y.mean()
+1.8088133743667858
