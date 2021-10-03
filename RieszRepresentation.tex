@@ -31,6 +31,8 @@
 \setlength{\parskip}{2ex}
 \setlength{\arraycolsep}{0.5ex}
 
+%\renewcommand{\qedsymbol}{}
+
 \DeclareMathOperator{\sol}{SOL}
 \DeclareMathOperator{\app}{APP}
 \DeclareMathOperator{\alg}{ALG}
@@ -38,6 +40,8 @@
 \DeclareMathOperator{\ERR}{ERR}
 \DeclareMathOperator{\COST}{COST}
 \DeclareMathOperator{\COMP}{COMP}
+\DeclareMathOperator{\LIN}{LINEAR}
+\DeclareMathOperator{\BAD}{BAD}
 \newcommand{\dataN}{\bigl(\hf(\vk_i)\bigr)_{i=1}^n}
 \newcommand{\dataNj}{\bigl(\hf(\vk_i)\bigr)_{i=1}^{n_j}}
 \newcommand{\dataNjd}{\bigl(\hf(\vk_i)\bigr)_{i=1}^{n_{j^\dagger}}}
@@ -122,42 +126,68 @@
     What seems \alert{obvious} for $d$-dimensional vectors becomes a power tool for \alert{numerical analysis}
     
     \begin{description}
-    \item[Obvious]<2-> If $L: \reals^3 \to \reals$ is a \alert{linear} functional, then we can represent $L(f)$ as an \alert{inner product}:
+    \item[Obvious]<2-> If $\LIN: \reals^3 \to \reals$ is any \alert{linear, real-valued} function, \uncover<2-4>{meaning,
     \[
-    L(\vf) = g_1 f_1 + g_2 f_2 + g_3 f_3 = \vg^T \vf =: \ip{\vg}{\vf} \quad \forall \vf \in \reals^3, \qquad \text{where $\vg \in \reals^3$ is fixed}
+    \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^3, \ c \in \reals,
+    \]}
+    then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{:
+    \[
+    \LIN(\vf) = g_1 f_1 + g_2 f_2 + g_3 f_3 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^3, \text{ where $\vg \in \reals^3$ is fixed}.
     \]
-   ``linear'' means that $L(c\vf + \vh) = c L(\vf) + L(\vh)$ 
-   \item[Powerful Tool]<3-> The generalization of this idea allows us to derive error bounds for numerical algorithms such as
+    \only<2>{The vector $\vg$ corresponds to the \alert{coefficients}.}}
+   \item[Powerful Tool]<3-> Generalization allows us to derive \alert{error bounds} for numerical algorithms, e.g.,
    \[
-   \abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) } \le \text{bad}(\vx_1, \ldots, \vx_n) \, \text{bad}(\vf)
+   \biggl\lvert\only<4->{\underbrace}{\int_{[0,1]^d} f(\vx) \, \dif \vx}\only<4->{_{\substack{\text{\alert{average} of $f$} \\ \text{e.g., option price}}} \quad}  - \only<4->{\underbrace}{\frac 1n \sum_{i=1}^n f(\vx_i)}\only<4->{_{\substack{\text{\alert{average} of $f$ values} \\ \text{e.g., payoffs under various scenarios} }}} \biggr\rvert \le \only<5->{\underbrace}{\BAD(\vx_1, \ldots, \vx_n)}\only<5->{_{\Large\substack{\alert{\text{Concentrate on }} \\
+   \alert{\text{choosing the $\vx_i$ well}}}}} \, \BAD(\vf)
    \]
     \end{description}
 \end{frame}
 
-\begin{frame}{Riesz Representation Theorem for $\reals^d$}
+\section{Riesz Rep Theorem in $\reals^d$}
+
+\begin{frame}{Riesz Representation Theorem for $\reals^3$}
 \begin{theorem}
-    If $L: \reals^d \to \reals$ is any linear functional, and $\ip{\vf}{\vh} : = \vf^T \vh$, then there exists a unique $\vg \in \reals^d$, dependent on $L$, for which $L(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^d$
+    If $\LIN: \reals^3 \to \reals$ is any linear, real-valued function, and $\ip{\vh}{\vf} : = h_1 f_1 + h_2 f_2 + h_3 f_3 = \vh^T \vf$, then there exists a unique $\vg \in \reals^3$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^3$
 \end{theorem}
 \begin{proof}
-\alert{Existence.} Let $\ve_j = (0, \ldots, \underbrace{1}_{j^{\text{th}} \text{ position}}, 0, \ldots, 0)^T$.  Then for all $\vf = (f_1, \ldots, f_d)^T$,
+\alert{Existence.} \only<1,2>{Let $\ve_1 = (1,0,0)^T$,  $\ve_2 = (0,1,0)^T$, and $\ve_3 = (0,0,1)^T$.  Then for all $\vf = (f_1, \ldots, f_d)^T$,
     \begin{align*}
-    L(\vf) &= L\bigl( \ve_1 f_1 + \cdots + \ve_d f_d \bigr)  = L(\ve_1) f_1 + \cdots + L(\ve_d) f_d \qquad \text{by linearlity} \\
-    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( L(\ve_1), \ldots, L(\ve_d) \bigr)^T
-    \end{align*}
-\alert{Uniqueness.} If $L(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
-\[
-0 = L(\vg - \tvg) - L(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
-\]
-so $\vg - \tvg = \vzero$ and $\vg = \tvg$.
-\end{proof}
+    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \ve_2 f_2 + + \ve_3 f_3 \bigr)  = \LIN(\ve_1) f_1 + \LIN(\ve_2) f_2 + \LIN(\ve_3) f_3 \text{ by linearity} \\
+    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \LIN(\ve_2), \LIN(\ve_3) \bigr)^T \qedhere
+    \end{align*} \vspace{-3.8ex}\phantom{a}}%
+    \only<3->{Done.
     
+\alert{Uniqueness.} If $\LIN(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
+\[
+0 = \LIN(\vg - \tvg) - \LIN(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
+\]
+so $\vg - \tvg = \vzero$ and $\vg = \tvg$.}%
+\end{proof}
+\only<2>{\noindent \alert{Example.} If $\LIN(\ve_1) = -3$, $\LIN(\ve_2) = 2$, and $\LIN(\ve_3) = 1$, then
+\[
+\LIN(\vf) = -3f_1, +2 f_2 + f_3.
+\]
+}
+\end{frame}
+
+\begin{frame}{The Dot/Inner Product}
+How I learned about $\vf \bigcdot \vh \equiv \ip{\vf}{\vh}$
+\begin{description} 
+\item[Geometry] Distance: $\norm{\vf} = \sqrt{f_1^2 + f_2^2}$
+
+\item[Trigonometry] Law of cosines: \\
+$\norm{\vf-\vh}^2 = \norm{\vf}^2 + \norm{\vh}^2 - 2 \norm{\vf}\norm{\vh}\cos(\measuredangle(\vf,\vh))$
+
+\item[Physics] $\vf \bigcdot \vh := \norm{\vf}\norm{\vh}\cos(\measuredangle(\vf,\vh))$ \\
+$\vf \bigcdot \vh  = \frac 12 \Bigl ( \norm{\vf}^2 + \norm{\vh}^2 - \norm{\vf-\vh}^2 \Bigr)$
+\end{description}
 \end{frame}
 
 
 
 \begin{frame}[label = generalRiesz]{Riesz Representation Theorem for a Hilbert Space $(V,\ip{\cdot}{\cdot})$}
 \begin{theorem}
-    If $L: V \to \reals$ is any \alert{continuous} linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, dependent on $L$, for which $L(f) =  \ip{g}{f}$ for all $f \in V$.
+    If $\LIN: V \to \reals$ is any \alert{continuous} linear real-valued function on the Hilbert space $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, dependent on $\LIN$, for which $\LIN(f) =  \ip{g}{f}$ for all $f \in V$.
 \end{theorem}
 \only<1>{
 \vspace{-5ex}
@@ -166,24 +196,25 @@ so $\vg - \tvg = \vzero$ and $\vg = \tvg$.
     & \qquad \ip{f}{f} > 0 \quad \forall f \ne 0 \\
     & \qquad \ip{f}{h} =\ip{h}{f} \\
     & \qquad \ip{cf+h}{k} = c \ip{f}{k} + c\ip{h}{k} \\
-    V & = \text{a vector space that is \alert{complete} under } \norm{\cdot}  \\
-    & \qquad \text{(sequences that should converge  do)}
+    V & = \text{Hilbert space $=$ a vector space that is \alert{complete} under } \norm{\cdot}  \\
+    & \qquad \text{(sequences that should converge  do)} \\
+    & \qquad \text{may be \alert{infinite} dimensional $=$ no finite basis}
 \end{align*}
 
-Can we prove it without referring to a basis for $V$?}
+Can we prove it \alert{without referring to a basis} for $V$?}
 \only<2->{\begin{proof}
-\alert{Existence.} \uncover<2-4>{Define $\ker(L) = \{f \in V : L(f) = 0\}$ as the subset of $V$ that $L$ maps into $0$. \only<2>{If $\ker(L) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$.}\only<3->{$\ker(L) = V$ easy.}} 
+\alert{Existence.} \uncover<2-4>{Define $\ker(L) = \{f \in V : \LIN(f) = 0\}$ as the subset of $V$ that $L$ maps into $0$. \only<2>{If $\ker(L) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$.}\only<3->{$\ker(L) = V$ easy.}} 
 
 \only<3->{Otherwise, pick any nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(L)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(L)$. 
 \only<5>{
 }  
-\only<2-4>{For any $f \in V$, let $h = L(f) g_\perp - L(g_\perp)f$, and note that 
+\only<2-4>{For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that 
 \[
-L(h) = L\bigl(L(f) g_\perp - L(g_\perp)f \bigr) = L(f)L(g_\perp) - L(g_\perp)L(f) = 0, \qquad \text{so } h \in \ker(L).
+\LIN(h) = L\bigl(\LIN(f) g_\perp - \LIN(g_\perp)f \bigr) = \LIN(f)\LIN(g_\perp) - \LIN(g_\perp)\LIN(f) = 0, \qquad \text{so } h \in \ker(L).
 \]
 The choice of $g_\perp$ implies that
 \[
-0 = \ip{g_\perp}{h} = L(f)\ip{g_\perp}{g_\perp}  - L(g_\perp) \ip{g_\perp}{f}, \quad \text{so } L(f) = \frac{L(g_\perp)\ip{g_\perp}{f}}{\ip{g_\perp}{g_\perp}} = \ip{g}{f} \text{ for } g:= \frac{L(g_\perp)g_\perp}{\norm{g}^2}.
+0 = \ip{g_\perp}{h} = \LIN(f)\ip{g_\perp}{g_\perp}  - \LIN(g_\perp) \ip{g_\perp}{f}, \quad \text{so } \LIN(f) = \frac{\LIN(g_\perp)\ip{g_\perp}{f}}{\ip{g_\perp}{g_\perp}} = \ip{g}{f} \text{ for } g:= \frac{\LIN(g_\perp)g_\perp}{\norm{g}^2}.
 \]
 
 \uncover<4->{\alert{Uniqueness.} Same proof as before.}}}
@@ -193,7 +224,7 @@ The choice of $g_\perp$ implies that
 
 \begin{frame}[label = lemma]{There Exists a Nonzero $g_\perp$ Orthogonal to All of $\ker(V)$ \hyperlink{generalRiesz}{\beamerreturnbutton{Back}}}
 \begin{lemma}
-     If $L: V \to \reals$ is any \alert{continuous} linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(L) := L^{-1}(\{0\}) = \{f \in V : L(f) = 0\} \ne V$,
+     If $\LIN: V \to \reals$ is any \alert{continuous} linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(L) := L^{-1}(\{0\}) = \{f \in V : \LIN(f) = 0\} \ne V$,
  	then $ \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(L)\} \alert{\ne \{0\}}$.
 \end{lemma}
 \begin{proof}
@@ -226,22 +257,22 @@ Blog at \href{https://qmcpy.wordpress.com/}{\nolinkurl{qmcpy.wordpress.com/}}}
 
 \begin{frame}{Riesz Representation Theorem for $\reals^d$, Alternative Proof}
 \begin{theorem}
-    If $L: \reals^d \to \reals$ is any linear functional, and $\ip{\vf}{\vh} : = \vf^T \vh$, then there exists a unique $\vg \in \reals^d$, dependent on $L$, for which $L(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^d$
+    If $\LIN: \reals^d \to \reals$ is any linear functional, and $\ip{\vf}{\vh} : = \vf^T \vh$, then there exists a unique $\vg \in \reals^d$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^d$
 \end{theorem}
 \begin{proof}
 \alert{Existence.} Let $\mK$ be the $d$-dimensional identity matrix and let $\vK_j \in \reals^d$ denote its $j^{\text{th}}$ column.  Note that 
 \[
 f_j = \ip{\vK_j}{\vf} \qquad \forall \vf \in \reals^d.
 \]
-Now define $\vg \in \reals^d$ by $g_j = L(\vK_j)$.
+Now define $\vg \in \reals^d$ by $g_j = \LIN(\vK_j)$.
 Then for all $\vf = (f_1, \ldots, f_d)^T$,
     \begin{align*}
-    L(\vf) &= L\bigl( \ve_1 f_1 + \cdots + \ve_d f_d \bigr)  = L(\ve_1) f_1 + \cdots + L(\ve_d) f_d \qquad \text{by linearlity} \\
-    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( L(\ve_1), \ldots, L(\ve_d) \bigr)^T
+    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \cdots + \ve_d f_d \bigr)  = \LIN(\ve_1) f_1 + \cdots + \LIN(\ve_d) f_d \qquad \text{by linearlity} \\
+    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \ldots, \LIN(\ve_d) \bigr)^T
     \end{align*}
-\alert{Uniqueness.} If $L(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
+\alert{Uniqueness.} If $\LIN(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
 \[
-0 = L(\vg - \tvg) - L(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
+0 = \LIN(\vg - \tvg) - \LIN(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
 \]
 so $\vg - \tvg = \vzero$ and $\vg = \tvg$.
 \end{proof}

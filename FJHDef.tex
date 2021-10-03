@@ -23,6 +23,11 @@
 \def\overstrike#1{ 
 \settowidth{\overwdth}{#1}\makebox[0pt][l]{\rule[0.5ex]{\overwdth}{0.1ex}}#1}
 
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.7}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
 \def\abs#1{\ensuremath{\left \lvert #1 \right \rvert}}
 \newcommand{\normabs}[1]{\ensuremath{\lvert #1 \rvert}}
 \newcommand{\bigabs}[1]{\ensuremath{\bigl \lvert #1 \bigr \rvert}}
@@ -159,12 +164,14 @@
 \newcommand{\vDelta}{\bvec{\Delta}}
 \newcommand{\vphi}{\bvec{\phi}}
 \newcommand{\vvphi}{\bvec{\varphi}}
+\newcommand{\vPhi}{\bvec{\Phi}}
 \newcommand{\vomega}{\bvec{\omega}}
 \newcommand{\vkappa}{\bvec{\kappa}}
 \newcommand{\vlambda}{\bvec{\lambda}}
 \newcommand{\vmu}{\bvec{\mu}}
 \newcommand{\vnu}{\bvec{\nu}}
 \newcommand{\vpsi}{\bvec{\psi}}
+\newcommand{\vPsi}{\bvec{\Psi}}
 \newcommand{\vepsilon}{\bvec{\epsilon}}
 \newcommand{\veps}{\bvec{\varepsilon}}
 \newcommand{\veta}{\bvec{\eta}}
