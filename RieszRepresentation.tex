@@ -143,7 +143,7 @@
     \end{description}
 \end{frame}
 
-\section{Riesz Rep Theorem in $\reals^d$}
+\section{Riesz Rep Thm in $\reals^d$}
 
 \begin{frame}{Riesz Representation Theorem for $\reals^3$}
 \begin{theorem}
@@ -170,7 +170,8 @@ so $\vg - \tvg = \vzero$ and $\vg = \tvg$.}%
 }
 \end{frame}
 
-\begin{frame}{The Dot/Inner Product}
+\section{Inner Product}
+\begin{frame}[label = dotproduct]{The Dot/Inner Product}
 \begin{columns}
 \begin{column}{0.5\textwidth}
 How I learned about $\vf \bigcdot \vh \equiv \ip{\vf}{\vh}$
@@ -210,14 +211,12 @@ Then distance and cosine
  	\norm{f} & := \sqrt{\ip{f}{f}}
  	\\
  	\cos(\measuredangle(f,h)) & : = \frac{\ip{f}{h}}{\norm{f}\norm{h}}  \\
- 	& \in [-1,1] \text{ by Cauchy-Schwartz}
+ 	& \in [-1,1] \text{ by Cauchy-Schwartz \hyperlink{CSProof}{\beamergotobutton{Proof}}}
   \end{align*}
  
  \vspace{-1.5ex}
  Law of cosines follows 
- 
 
- 
 }
 \end{column}
 \end{columns}
@@ -225,43 +224,74 @@ Then distance and cosine
 \end{frame}
 
 
+\section{Riesz Rep Thm for Hilbert Spaces}
 
 \begin{frame}[label = generalRiesz]{Riesz Representation Theorem for a Hilbert Space $(V,\ip{\cdot}{\cdot})$}
 \begin{theorem}
-    If $\LIN: V \to \reals$ is any \alert{continuous} linear real-valued function on the Hilbert space $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, dependent on $\LIN$, for which $\LIN(f) =  \ip{g}{f}$ for all $f \in V$.
+    If $\LIN: V \to \reals$ is any \alert{continuous} linear real-valued function on the \alert{Hilbert space} $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, dependent on $\LIN$, for which $\LIN(f) =  \ip{g}{f}$ for all $f \in V$.
 \end{theorem}
 \only<1>{
 \vspace{-5ex}
 \begin{align*}
-    \ip{\cdot}{\cdot \cdot} & =  \text{an inner product on } V \times V & \norm{f} & := \sqrt{\ip{f}{f}}\\
-    & \qquad \ip{f}{f} > 0 \quad \forall f \ne 0 \\
-    & \qquad \ip{f}{h} =\ip{h}{f} \\
-    & \qquad \ip{cf+h}{k} = c \ip{f}{k} + c\ip{h}{k} \\
-    V & = \text{Hilbert space $=$ a vector space that is \alert{complete} under } \norm{\cdot}  \\
+    \text{Hilbert space} & = \text{a vector space that is \alert{complete} under } \norm{\cdot}  \\
     & \qquad \text{(sequences that should converge  do)} \\
-    & \qquad \text{may be \alert{infinite} dimensional $=$ no finite basis}
+    & \qquad \text{may be \alert{infinite} dimensional $=$ no finite basis} \\
+    \text{continuous } & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$)}
 \end{align*}
 
-Can we prove it \alert{without referring to a basis} for $V$?}
+Can we prove this theorem \alert{without referring to a basis} for $V$?}
 \only<2->{\begin{proof}
-\alert{Existence.} \uncover<2-4>{Define $\ker(L) = \{f \in V : \LIN(f) = 0\}$ as the subset of $V$ that $L$ maps into $0$. \only<2>{If $\ker(L) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$.}\only<3->{$\ker(L) = V$ easy.}} 
+\alert{Existence.} \only<2-4>{Define $\ker(\LIN) = \{f \in V : \LIN(f) = 0\}$ as the \only<2>{ $\dim(V) - 1$ dimensional }subspace of $V$ that $\LIN$ maps into $0$. \only<2>{If $\ker(\LIN) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$.}\only<3->{$\ker(\LIN) = V$ is easy.  Otherwise, pick any nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(\LIN)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(\LIN)$.  \uncover<4->{ For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that}}
 
-\only<3->{Otherwise, pick any nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(L)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(L)$. 
-\only<5>{
-}  
-\only<2-4>{For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that 
-\[
-\LIN(h) = L\bigl(\LIN(f) g_\perp - \LIN(g_\perp)f \bigr) = \LIN(f)\LIN(g_\perp) - \LIN(g_\perp)\LIN(f) = 0, \qquad \text{so } h \in \ker(L).
-\]
-The choice of $g_\perp$ implies that
-\[
-0 = \ip{g_\perp}{h} = \LIN(f)\ip{g_\perp}{g_\perp}  - \LIN(g_\perp) \ip{g_\perp}{f}, \quad \text{so } \LIN(f) = \frac{\LIN(g_\perp)\ip{g_\perp}{f}}{\ip{g_\perp}{g_\perp}} = \ip{g}{f} \text{ for } g:= \frac{\LIN(g_\perp)g_\perp}{\norm{g}^2}.
+\only<3->{\vspace{-3ex}}
+\begin{tabular}{m{0.7\textwidth}m{0.3\textwidth}}
+\uncover<4->{\[
+\begin{aligned}
+\LIN(h) & = \LIN\bigl(\LIN(f) g_\perp - \LIN(g_\perp)f \bigr) \\
+& = \LIN(f)\LIN(g_\perp) - \LIN(g_\perp)\LIN(f) = 0, 
+\end{aligned}
 \]
 
-\uncover<4->{\alert{Uniqueness.} Same proof as before.}}}
+\vspace{-1.5ex}
+so $h \in \ker(\LIN)$.  The choice of $g_\perp$ implies that
+\vspace{-1.5ex}
+\begin{gather*}
+0 = \ip{g_\perp}{h} = \LIN(f)\ip{g_\perp}{g_\perp}  - \LIN(g_\perp) \ip{g_\perp}{f}, \quad \\
+\LIN(f) = \frac{\LIN(g_\perp)\ip{g_\perp}{f}}{\ip{g_\perp}{g_\perp}} = \ip{g}{f} \quad \text{for } g:= \frac{\LIN(g_\perp)g_\perp}{\norm{g}^2}.
+\end{gather*}}
+&
+\includegraphics<2>[width = 0.25\textwidth]{ProgramsImages/kernelLinear.eps}
+\includegraphics<3>[width = 0.25\textwidth]{ProgramsImages/kernelgperp.eps}
+\includegraphics<4->[width = 0.25\textwidth]{ProgramsImages/RieszRepThm.eps}
+\end{tabular}
+}
+\only<5->{Done.
+	
+\alert{Uniqueness.} Same proof as before.} \qedhere
 \end{proof}}
     
 \end{frame}
+
+
+
+
+\begin{frame}{What Can We Do with the Riesz Representation Theorem?}
+	A nice numerical analysis result:
+	
+\begin{theorem} 
+	Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$.  Suppose that integration and function evaluation are both continuous, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
+		\[
+    	\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
+    				= \abs{\ip{\eta}{f}} = \abs{\cos\bigl(\measuredangle(\eta,f) \bigr)} \norm{\eta} \norm{f} 
+    				\le \norm{\eta} \norm{f} \qquad \forall f \in V,
+		\]
+		for some  $\eta \in V$ that depends on $\vx_1, \ldots, \vx_n$, but not on $f$.
+
+	\end{theorem}
+\end{frame}
+
+
+\section{Deleted Scenes}
 
 \begin{frame}[label = lemma]{There Exists a Nonzero $g_\perp$ Orthogonal to All of $\ker(V)$ \hyperlink{generalRiesz}{\beamerreturnbutton{Back}}}
 \begin{lemma}
@@ -279,6 +309,38 @@ So, $k_n \to k \in V$ due to completeness of $V$; $k \in \ker(K)$ due to continu
 \end{proof}
 \end{frame}
 
+
+\begin{frame}[label = CSProof]{Proof of the Cauchy-Schwarz Inequality \hyperlink{dotproduct}{\beamerreturnbutton{Back}}}
+	
+	\begin{theorem}[Cauchy-Schwarz] Let $(V,\ip{\cdot}{\cdot})$ be a real-valued inner product space.  Then
+		\begin{equation}\tag{C-S} \label{eq:C-S}
+		\abs{\ip{f}{h}} \le \norm{f} \norm{h} \qquad \forall f, h \in V,
+		\end{equation}
+		with equality iff $c_1 f + c_2 h = 0$ for some nonzero $(c_1, c_2)$.
+	\end{theorem}
+
+\only<1>{\begin{proof}[Proof of Inequality]
+	If $f$ or $h$ are zero, the inequality becomes an equality by direct calculation.  For any nonzero $f, h \in V$, define the quadratic polynomial $p$ as follows:
+		\begin{equation*}
+			p(t) :=  \norm{t f + h}^2 = \ip{t f + h}{t f + h} = t^2 \ip{f}{f} + 2t \ip{f}{h} + \ip{h}{h} 
+			= t^2 \norm{f}^2 + 2t \ip{f}{h} + \norm{h}^2.
+		\end{equation*} 
+		Since $p(t) \ge 0$ by definition, $p$ cannot have two roots, which means that  $\bigl(\ip{f}{h}\bigr)^2 - \norm{f}^2 \norm{h}^2$ must be non-positive.  This implies the inequality for $\abs{\ip{f}{h}}$. 
+\end{proof}}
+\only<2->{\begin{proof}[Proof of Equality]
+		Recall that
+		\begin{equation*}
+			p(t) :=  \norm{t f + h}^2
+			= t^2 \norm{f}^2 + 2t \ip{f}{h} + \norm{h}^2.
+		\end{equation*} 
+		Equality in \eqref{eq:C-S} happens iff $\abs{\ip{f}{h}} = \norm{f} \norm{h}$, which implies that $p$ has a single root, $t_0$.  Then
+		\[
+		0 = p(t_0) = \norm{t_0 f + h}^2,
+		\]
+		which is true iff $t_0 f + h = 0$ by the definition of a norm. 
+\end{proof}}
+	
+\end{frame}
 \end{document}
 
 
@@ -289,6 +351,8 @@ Blog at \href{https://qmcpy.wordpress.com/}{\nolinkurl{qmcpy.wordpress.com/}}}
 
 
 \thankyouframe
+
+
 
 
 \end{document}
