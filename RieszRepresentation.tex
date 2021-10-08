@@ -131,13 +131,13 @@
     What seems \alert{obvious} for $d$-dimensional vectors becomes a power tool for \alert{numerical analysis}
     
     \begin{description}
-    \item[Obvious]<2-> If $\LIN: \reals^3 \to \reals$ is any \alert{linear, real-valued} function, \uncover<2-4>{meaning,
+    \item[Obvious]<2-> If $\LIN: \reals^2 \to \reals$ is any \alert{linear, real-valued} function, \uncover<2-4>{meaning,
     \[
     \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^3, \ c \in \reals,
     \]}
     then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{:
     \[
-    \LIN(\vf) = g_1 f_1 + g_2 f_2 + g_3 f_3 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^3, \text{ where $\vg \in \reals^3$ is fixed}.
+    \LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2, \text{ where $\vg \in \reals^2$ is fixed}.
     \]
     \only<2>{The vector $\vg$ corresponds to the \alert{coefficients}.}}
    \item[Powerful Tool]<3-> Generalization allows us to derive \alert{error bounds} for numerical algorithms, e.g.,
@@ -156,19 +156,19 @@ My most cited paper \cite{Hic97a} is a \alert{simple application} of the Riesz R
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Riesz Rep Thm in $\reals^d$}
+\section{Riesz Rep Thm in $\reals^2$}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Riesz Representation Theorem for $\reals^3$}
+\begin{frame}{Riesz Representation Theorem for $\reals^2$}
 \begin{theorem}
-    If $\LIN: \reals^3 \to \reals$ is any linear, real-valued function, and $\ip{\vh}{\vf} : = h_1 f_1 + h_2 f_2 + h_3 f_3 = \vh^T \vf$, then there exists a unique $\vg \in \reals^3$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^3$
+    If $\LIN: \reals^2 \to \reals$ is any linear, real-valued function, and $\ip{\vh}{\vf} : = h_1 f_1 + h_2 f_2  = \vh^T \vf$, then there exists a unique $\vg \in \reals^2$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^2$
 \end{theorem}
 \begin{proof}
-\alert{Existence.} \only<1,2>{Let $\ve_1 = (1,0,0)^T$,  $\ve_2 = (0,1,0)^T$, and $\ve_3 = (0,0,1)^T$.  Then for all $\vf = (f_1, f_2 , f_d)^T$,
+\alert{Existence.} \only<1,2>{Let $\ve_1 = (1,0)^T$ and  $\ve_2 = (0,1)^T$.  Then for all $\vf = (f_1, f_2)^T$,
     \begin{align*}
-    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \ve_2 f_2 + + \ve_3 f_3 \bigr)  = \LIN(\ve_1) f_1 + \LIN(\ve_2) f_2 + \LIN(\ve_3) f_3 \text{ by linearity} \\
-    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \LIN(\ve_2), \LIN(\ve_3) \bigr)^T \qedhere
+    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \ve_2 f_2 \bigr)  = \LIN(\ve_1) f_1 + \LIN(\ve_2) f_2  \qquad \text{by linearity} \\
+    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \LIN(\ve_2) \bigr)^T \qedhere
     \end{align*} \vspace{-3.8ex}\phantom{a}}%
     \only<3->{Done.
     
@@ -178,9 +178,9 @@ My most cited paper \cite{Hic97a} is a \alert{simple application} of the Riesz R
 \]
 so $\vg - \tvg = \vzero$ and $\vg = \tvg$.}%
 \end{proof}
-\only<2>{\noindent \alert{Example.} If $\LIN(\ve_1) = -3$, $\LIN(\ve_2) = 2$, and $\LIN(\ve_3) = 1$, then
+\only<2>{\noindent \alert{Example.} If $\LIN(\ve_1) = -3$ and $\LIN(\ve_2) = 2$, then
 \[
-\LIN(\vf) = -3f_1, +2 f_2 + f_3.
+\LIN(\vf) = -3f_1, +2 f_2.
 \]
 }
 \end{frame}
@@ -303,7 +303,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 
 \begin{frame}{What Can We Do with the Riesz Representation Theorem?}
 	
-	\vspace{-2ex}
+	\vspace{-1ex}
 	
 \begin{theorem}[\only<4>{Preliminary }Error Bound for Numerical Integration] 
 	Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$.  Suppose that integration and function evaluation are both continuous, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
@@ -315,6 +315,8 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 		for some  $\eta \in V$ that depends on $\vx_1, \ldots, \vx_n$, but not on $f$.
 
 	\end{theorem}
+	
+	\vspace{-1ex}
 \only<1,4>{\alert{Significance}
 	
 	\vspace{-2ex}
@@ -398,8 +400,10 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 
 \thankyouframe
 
+\begin{frame}{References}
+    \printbibliography
+\end{frame}
 
-\printbibliography
 
 
 
@@ -446,18 +450,43 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 %\end{document}
 
 \begin{frame}[label = lemma]{There Exists a Nonzero $g_\perp$ Orthogonal to All of $\ker(V)$ \hyperlink{generalRiesz}{\beamerreturnbutton{Back}}}
+\vspace{-0.5ex}
 	\begin{lemma}
-		If $\LIN: V \to \reals$ is any \alert{continuous} linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(L) := L^{-1}(\{0\}) = \{f \in V : \LIN(f) = 0\} \ne V$,
-		then $ \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(L)\} \alert{\ne \{0\}}$.
+		If $\LIN: V \to \reals$ is any \alert{continuous}, linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(\LIN) := \LIN^{-1}(\{0\}) = \{f \in V : \LIN(f) = 0\} \ne V$,
+		then there exists a nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(\LIN)\}$.
 	\end{lemma}
+	\vspace{-1ex}
 	\begin{proof}
-		Define $\dist\bigl(h,\ker(L)\bigr) := \inf\{ \norm{h - f} : f \in \ker(L)\}$, i.e., the closest $\ker(L)$ comes to $h$.  For any $h \notin \ker(L)$, choose $k_n \in \ker(L)$ such that $\norm{h - k_n}^2 \le \dist^2\bigl(h,\ker(L)\bigr) + 1/n$ for $n = 1, 2, \ldots$.  By the \alert{parallelogram law}, 
+	\only<1>{	Define $\dist\bigl(h,\ker(\LIN)\bigr) := \inf\{ \norm{h - f} : f \in \ker(\LIN)\}$, i.e., the closest $\ker(\LIN)$ comes to $h$.  For any $h \notin \ker(\LIN)$, choose $k_n \in \ker(\LIN)$ such that $\norm{h - k_n}^2 \le \dist^2\bigl(h,\ker(\LIN)\bigr) + 1/n$ for $n = 1, 2, \ldots$.  By the \alert{parallelogram law}, 
+		
+		\vspace{-3.5ex}
 		\begin{align*}
 			\norm{k_m - k_n}^2 &= \norm{(k_m - h) - (k_n-h) }^2 = 2\norm{k_m - h}^2 + 2\norm{k_n-h}^2 - \norm{(k_m - h) + (k_n-h) }^2 \\
-			&= 2\norm{k_m - h}^2 + 2\norm{k_n-h}^2 - 4\norm{(k_m+k_n)/2-h) }^2 \qquad \text{(note that $(k_m+k_n)/2 \in \ker(L)$)}\\
-			& \le 2\bigl[\dist^2\bigl(h,\ker(L)\bigr) + 1/m] + 2\bigl[\dist^2\bigl(h,\ker(L)\bigr) + 1/n] - 4\dist^2\bigl(h,\ker(L)\bigr) = 2(1/m+1/n)
+			&= 2\norm{k_m - h}^2 + 2\norm{k_n-h}^2 - 4\norm{(k_m+k_n)/2-h) }^2 \qquad (k_m+k_n)/2 \in \ker(\LIN))\\
+			& \le 2\bigl[\dist^2\bigl(h,\ker(\LIN)\bigr) + 1/m] + 2\bigl[\dist^2\bigl(h,\ker(\LIN)\bigr) + 1/n] \\
+			&\qquad \qquad - 4\dist^2\bigl(h,\ker(\LIN)\bigr) = 2(1/m+1/n)
 		\end{align*}
-		So, $k_n \to k \in V$ due to completeness of $V$; $k \in \ker(K)$ due to continuity of $L$. Let $g_\perp = h - k$.  Then 
+		
+		\vspace{-2ex}
+		So, $k_n \to k \in V$ due to \alert{completeness} of $V$; $k \in \ker(\LIN)$ due to continuity of $\LIN$.
+		
+		\vspace{-1.5ex}
+		\[
+		\norm{h-k} = \lim_{n \to \infty} \norm{h-k_n} =  \lim_{n \to \infty} \sqrt{\dist^2\bigl(h,\ker(\LIN)\bigr) + 1/n} = \dist\bigl(h,\ker(\LIN)\bigr)
+		\]
+		}%
+		\only<2->{Let $g_\perp = h-k$.  Since $h \notin \ker(\LIN)$ and $k \in \ker(\LIN)$, then $h\ne k$ and 
+		\[
+		\norm{g_\perp} = \norm{h-k} = \dist\bigl(h,\ker(\LIN)\bigr) \ne 0.
+		\]
+		Pick any $f \in \ker(\LIN)$, and note that $k + tf \in \ker(\LIN)$ for all $t \in \reals$.  Thus,
+ 		\begin{align*}
+ 		\norm{g_\perp}^2 &\le \norm{h - (k+ tf)}^2 = \norm{g_\perp -tf}^2 
+ 		= \norm{g_\perp}^2 - 2t \ip{g_\perp}{f} + t^2 \norm{f}^2\\
+ 		0 & \le t \bigl[ -2\ip{g_\perp}{f} + t \norm{f}^2 \bigr] \qquad \forall t \in \reals
+ 		\end{align*}
+ 		The only way to ensure this inequality for all $t$ is for $\ip{g_\perp}{f} = 0$.
+		\qedhere}
 	\end{proof}
 \end{frame}
 
