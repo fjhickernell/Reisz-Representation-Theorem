@@ -73,7 +73,7 @@
 
 \renewcommand{\OffTitleLength}{-7ex}
 \setlength{\FJHThankYouMessageOffset}{-8ex}
-\title{The Reisz Representation Theorem}
+\title{My Favorite Theorem: \\ The Reisz Representation Theorem}
 \author[]{Fred J. Hickernell}
 \institute{Department of Applied Mathematics \&
 	Center for Interdisciplinary Scientific Computation \\  Illinois Institute of Technology \quad
@@ -83,7 +83,7 @@
 \thanksnote{Thanks to the Illinois Tech Student Chapter for the invitation}
 	
 \event{My Favorite Theorem}
-\date[]{???, 2021}
+\date[]{October 19, 2021}
 
 \input FJHDef.tex
 
@@ -131,13 +131,13 @@
     What seems \alert{obvious} for $d$-dimensional vectors becomes a power tool for \alert{numerical analysis}
     
     \begin{description}
-    \item[Obvious]<2-> If $\LIN: \reals^3 \to \reals$ is any \alert{linear, real-valued} function, \uncover<2-4>{meaning,
+    \item[Obvious]<2-> If $\LIN: \reals^2 \to \reals$ is any \alert{linear, real-valued} function, \uncover<2-4>{meaning,
     \[
     \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^3, \ c \in \reals,
     \]}
     then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{:
     \[
-    \LIN(\vf) = g_1 f_1 + g_2 f_2 + g_3 f_3 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^3, \text{ where $\vg \in \reals^3$ is fixed}.
+    \LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2, \text{ where $\vg \in \reals^2$ is fixed}.
     \]
     \only<2>{The vector $\vg$ corresponds to the \alert{coefficients}.}}
    \item[Powerful Tool]<3-> Generalization allows us to derive \alert{error bounds} for numerical algorithms, e.g.,
@@ -156,19 +156,19 @@ My most cited paper \cite{Hic97a} is a \alert{simple application} of the Riesz R
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Riesz Rep Thm in $\reals^d$}
+\section{Riesz Rep Thm in $\reals^2$}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Riesz Representation Theorem for $\reals^3$}
+\begin{frame}{Riesz Representation Theorem for $\reals^2$}
 \begin{theorem}
-    If $\LIN: \reals^3 \to \reals$ is any linear, real-valued function, and $\ip{\vh}{\vf} : = h_1 f_1 + h_2 f_2 + h_3 f_3 = \vh^T \vf$, then there exists a unique $\vg \in \reals^3$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^3$
+    If $\LIN: \reals^2 \to \reals$ is any linear, real-valued function, and $\ip{\vh}{\vf} : = h_1 f_1 + h_2 f_2  = \vh^T \vf$, then there exists a unique $\vg \in \reals^2$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^2$
 \end{theorem}
 \begin{proof}
-\alert{Existence.} \only<1,2>{Let $\ve_1 = (1,0,0)^T$,  $\ve_2 = (0,1,0)^T$, and $\ve_3 = (0,0,1)^T$.  Then for all $\vf = (f_1, f_2 , f_d)^T$,
+\alert{Existence.} \only<1,2>{Let $\ve_1 = (1,0)^T$ and  $\ve_2 = (0,1)^T$.  Then for all $\vf = (f_1, f_2)^T$,
     \begin{align*}
-    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \ve_2 f_2 + + \ve_3 f_3 \bigr)  = \LIN(\ve_1) f_1 + \LIN(\ve_2) f_2 + \LIN(\ve_3) f_3 \text{ by linearity} \\
-    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \LIN(\ve_2), \LIN(\ve_3) \bigr)^T \qedhere
+    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \ve_2 f_2 \bigr)  = \LIN(\ve_1) f_1 + \LIN(\ve_2) f_2  \qquad \text{by linearity} \\
+    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \LIN(\ve_2) \bigr)^T \qedhere
     \end{align*} \vspace{-3.8ex}\phantom{a}}%
     \only<3->{Done.
     
@@ -178,9 +178,9 @@ My most cited paper \cite{Hic97a} is a \alert{simple application} of the Riesz R
 \]
 so $\vg - \tvg = \vzero$ and $\vg = \tvg$.}%
 \end{proof}
-\only<2>{\noindent \alert{Example.} If $\LIN(\ve_1) = -3$, $\LIN(\ve_2) = 2$, and $\LIN(\ve_3) = 1$, then
+\only<2>{\noindent \alert{Example.} If $\LIN(\ve_1) = -3$ and $\LIN(\ve_2) = 2$, then
 \[
-\LIN(\vf) = -3f_1, +2 f_2 + f_3.
+\LIN(\vf) = -3f_1, +2 f_2.
 \]
 }
 \end{frame}
@@ -262,12 +262,12 @@ Then distance and cosine
     \text{Hilbert space} & = \text{a vector space that is \alert{complete} under } \norm{\cdot}  \\
     & \qquad \text{(sequences that should converge  do)} \\
     & \qquad \text{may be \alert{infinite} dimensional $=$ no finite basis} \\
-    \text{continuous } & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$)}
+    \text{continuous } & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})}
 \end{align*}
 
 Can we prove this theorem \alert{without referring to a basis} for $V$?}
 \only<2->{\begin{proof}
-\alert{Existence.} \only<2-5>{Define $\ker(\LIN) = \{f \in V : \LIN(f) = 0\}$ as the \only<2>{ $\dim(V) - 1$ dimensional }subspace of $V$ that $\LIN$ maps into $0$. \only<2>{If $\ker(\LIN) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$.}\only<3->{$\ker(\LIN) = V$ is easy.  Otherwise, pick any nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(\LIN)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(\LIN)$.  \uncover<4->{ For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that}}
+\alert{Existence.} \only<2-5>{Define $\ker(\LIN) = \{f \in V : \LIN(f) = 0\}$ as the \only<2>{ $\dim(V) - 1$ dimensional }subspace of $V$ that $\LIN$ maps into $0$. \only<2>{If $\ker(\LIN) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$.}\only<3->{$\ker(\LIN) = V$ is easy.  Otherwise, pick any nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(\LIN)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}\hypertarget<3>{backfromhowpick}{}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(\LIN)$.  \uncover<4->{ For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that}}
 
 \only<3->{\vspace{-3ex}}
 \begin{tabular}{m{0.7\textwidth}m{0.3\textwidth}}
@@ -303,7 +303,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 
 \begin{frame}{What Can We Do with the Riesz Representation Theorem?}
 	
-	\vspace{-2ex}
+	\vspace{-1ex}
 	
 \begin{theorem}[\only<4>{Preliminary }Error Bound for Numerical Integration] 
 	Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$.  Suppose that integration and function evaluation are both continuous, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
@@ -315,6 +315,8 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 		for some  $\eta \in V$ that depends on $\vx_1, \ldots, \vx_n$, but not on $f$.
 
 	\end{theorem}
+	
+	\vspace{-1ex}
 \only<1,4>{\alert{Significance}
 	
 	\vspace{-2ex}
@@ -346,11 +348,12 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Reproducing Kernels \cite{Aro50}}
+\begin{frame}[label = RK]{Reproducing Kernels \cite{Aro50}}
 	Suppose that  $(V,\ip{\cdot}{\cdot})$  is  Hilbert space of functions on $\Omega$ for which function evaluation is a continuous, linear functional.  Then there exists, $K: \Omega \times \Omega \to \reals$ called a \alert{reproducing kernel} for which 
 	\begin{equation*}
 		\underbrace{K(\vt,\vx) = K(\vx,\vt)}_{\text{symmetry}},  \quad \underbrace{K(\cdot,\vx) \in V}_{\text{belonging}}, \quad  \underbrace{f(\vx) = \ip{K(\cdot,\vx)}{f}}_{\text{reproduction}}  \qquad \forall \vt, \vx \in \Omega, \; f \in V
 	\end{equation*}
+	\only<1>{What do reproducing kernels look like for $V=\reals^d$ \hyperlink{RKRd}{\beamergotobutton{Look here}}}
 \uncover<2->{Combining with the Riesz Reproduction Theorem
 \begin{gather*}
 	\ERR(f) := \int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) 
@@ -369,7 +372,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 \end{frame}
 
 
-\begin{frame}{Putting It Together}
+\begin{frame}[label = KH]{Putting It Together}
 	
 	\vspace{-2ex}
 	
@@ -389,17 +392,19 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 		
 	\end{theorem}
 	
+	\vspace{-2ex}
+	For an explicit example of a $K$ and $\BAD(\vx_1, \ldots, \vx_n)$ \hyperlink{CDKH}{\beamergotobutton{Look here}}
 \end{frame}
 
-\finalthanksnote{These slides are  available at \\  \href{https://speakerdeck.com/fjhickernell/quasi-monte-carlo-software}{\nolinkurl{speakerdeck.com/fjhickernell/quasi-monte-carlo-software}}\\
-	Google Colaboratory notebook at \href{https://tinyurl.com/QMCPyTutorial}{\nolinkurl{tinyurl.com/QMCPyTutorial}}\\
-	Blog at \href{https://qmcpy.wordpress.com/}{\nolinkurl{qmcpy.wordpress.com/}}}
+\finalthanksnote{These slides are  available at \\  \href{https://speakerdeck.com/fjhickernell/riesz-representation-theorem}{\nolinkurl{speakerdeck.com/fjhickernell/quasi-monte-carlo-software}}}
 
 
 \thankyouframe
 
+\begin{frame}{References}
+    \printbibliography
+\end{frame}
 
-\printbibliography
 
 
 
@@ -410,6 +415,29 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\begin{frame}[label=lindisc]{How Can a Linear Function on a Hilbert Space be \emph{Dis}continuous? \hyperlink{generalRiesz}{\beamerreturnbutton{Back}}}
+
+\vspace{-2ex}
+Short answer: $V$ must be infinite dimensional.
+
+\uncover<2>{Consider a vector space of real, valued sequences with the typical inner product:  
+\[
+V := \{(f_1, f_2, \ldots) : f_i \in \reals, \norm{\vf} < \infty \}, \qquad \ip{\vf}{\vh} := f_1 h_1 + f_2h_2 + f_3h_3 + \cdots
+\]
+Define the linear real-valued function
+\[
+\LIN(f) = f_1 + 2f_2 + 3f_3 +4f_4 + \cdots
+\]
+Then for $\ve_i := (0, \ldots, 0, \underbrace{1}_{i^{\text{th}} \text{ position}}, 0, \ldots )$, then $\norm{\delta \ve_i} = \delta$, but
+\[
+\sup_{i = 1, 2, \ldots} \abs{\LIN(\delta \ve_i) - \LIN(\vzero)} = \sup_{i = 1, 2, \ldots} \abs{i \delta} = \infty
+\]
+No matter how small $\norm{\vf}$ is, you cannot ensure that $\abs{\LIN(\vf)}$ is small enough.
+
+}
+
+\end{frame}
 
 
 \begin{frame}[label = CSProof]{Proof of the Cauchy-Schwarz Inequality \hyperlink{dotproduct}{\beamerreturnbutton{Back}}}
@@ -443,22 +471,73 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 \end{proof}}
 	
 \end{frame}
-%\end{document}
 
-\begin{frame}[label = lemma]{There Exists a Nonzero $g_\perp$ Orthogonal to All of $\ker(V)$ \hyperlink{generalRiesz}{\beamerreturnbutton{Back}}}
+
+\begin{frame}[label = lemma]{There Exists a Nonzero $g_\perp$ Orthogonal to All of $\ker(V)$ \hyperlink{backfromhowpick}{\beamerreturnbutton{Back}}}
+\vspace{-0.5ex}
 	\begin{lemma}
-		If $\LIN: V \to \reals$ is any \alert{continuous} linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(L) := L^{-1}(\{0\}) = \{f \in V : \LIN(f) = 0\} \ne V$,
-		then $ \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(L)\} \alert{\ne \{0\}}$.
+		If $\LIN: V \to \reals$ is any \alert{continuous}, linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(\LIN) := \LIN^{-1}(\{0\}) = \{f \in V : \LIN(f) = 0\} \ne V$,
+		then there exists a nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(\LIN)\}$.
 	\end{lemma}
+	\vspace{-1ex}
 	\begin{proof}
-		Define $\dist\bigl(h,\ker(L)\bigr) := \inf\{ \norm{h - f} : f \in \ker(L)\}$, i.e., the closest $\ker(L)$ comes to $h$.  For any $h \notin \ker(L)$, choose $k_n \in \ker(L)$ such that $\norm{h - k_n}^2 \le \dist^2\bigl(h,\ker(L)\bigr) + 1/n$ for $n = 1, 2, \ldots$.  By the \alert{parallelogram law}, 
+	\only<1>{	Define $\dist\bigl(h,\ker(\LIN)\bigr) := \inf\{ \norm{h - f} : f \in \ker(\LIN)\}$, i.e., the closest $\ker(\LIN)$ comes to $h$.  For any $h \notin \ker(\LIN)$, choose $k_n \in \ker(\LIN)$ such that $\norm{h - k_n}^2 \le \dist^2\bigl(h,\ker(\LIN)\bigr) + 1/n$ for $n = 1, 2, \ldots$.  By the \alert{parallelogram law}, 
+		
+		\vspace{-3.5ex}
 		\begin{align*}
 			\norm{k_m - k_n}^2 &= \norm{(k_m - h) - (k_n-h) }^2 = 2\norm{k_m - h}^2 + 2\norm{k_n-h}^2 - \norm{(k_m - h) + (k_n-h) }^2 \\
-			&= 2\norm{k_m - h}^2 + 2\norm{k_n-h}^2 - 4\norm{(k_m+k_n)/2-h) }^2 \qquad \text{(note that $(k_m+k_n)/2 \in \ker(L)$)}\\
-			& \le 2\bigl[\dist^2\bigl(h,\ker(L)\bigr) + 1/m] + 2\bigl[\dist^2\bigl(h,\ker(L)\bigr) + 1/n] - 4\dist^2\bigl(h,\ker(L)\bigr) = 2(1/m+1/n)
+			&= 2\norm{k_m - h}^2 + 2\norm{k_n-h}^2 - 4\norm{(k_m+k_n)/2-h) }^2 \qquad (k_m+k_n)/2 \in \ker(\LIN))\\
+			& \le 2\bigl[\dist^2\bigl(h,\ker(\LIN)\bigr) + 1/m] + 2\bigl[\dist^2\bigl(h,\ker(\LIN)\bigr) + 1/n] \\
+			&\qquad \qquad - 4\dist^2\bigl(h,\ker(\LIN)\bigr) = 2(1/m+1/n)
 		\end{align*}
-		So, $k_n \to k \in V$ due to completeness of $V$; $k \in \ker(K)$ due to continuity of $L$. Let $g_\perp = h - k$.  Then 
+		
+		\vspace{-2ex}
+		So, $k_n \to k \in V$ due to \alert{completeness} of $V$; $k \in \ker(\LIN)$ due to continuity of $\LIN$.
+		
+		\vspace{-1.5ex}
+		\[
+		\norm{h-k} = \lim_{n \to \infty} \norm{h-k_n} =  \lim_{n \to \infty} \sqrt{\dist^2\bigl(h,\ker(\LIN)\bigr) + 1/n} = \dist\bigl(h,\ker(\LIN)\bigr)
+		\]
+		}%
+		\only<2->{Let $g_\perp = h-k$.  Since $h \notin \ker(\LIN)$ and $k \in \ker(\LIN)$, then $h\ne k$ and 
+		\[
+		\norm{g_\perp} = \norm{h-k} = \dist\bigl(h,\ker(\LIN)\bigr) \ne 0.
+		\]
+		Pick any $f \in \ker(\LIN)$, and note that $k + tf \in \ker(\LIN)$ for all $t \in \reals$.  Thus,
+ 		\begin{align*}
+ 		\norm{g_\perp}^2 &\le \norm{h - (k+ tf)}^2 = \norm{g_\perp -tf}^2 
+ 		= \norm{g_\perp}^2 - 2t \ip{g_\perp}{f} + t^2 \norm{f}^2\\
+ 		0 & \le t \bigl[ -2\ip{g_\perp}{f} + t \norm{f}^2 \bigr] \qquad \forall t \in \reals
+ 		\end{align*}
+ 		The only way to ensure this inequality for all $t$ is for $\ip{g_\perp}{f} = 0$.
+		\qedhere}
 	\end{proof}
+\end{frame}
+
+
+\begin{frame}[label = RKRd]{What Does a Reproducing Kernel Look Like for $V =\reals^d$? \hyperlink{RK}{\beamerreturnbutton{Back}}}
+
+\vspace{-3ex}
+In this case, the functions have domain $\Omega := \{1, \ldots, d\}$, and we represent them as vectors of matrices.  Pick a symmetric, positive definite (all eigenvalues are positive) matrix $\mA \in \reals^{d \times d}$ to define the inner product
+\[
+\ip{f}{h} : = \vf^T \mA \vh, \qquad \text{where } \vf = \bigl(f(i) \bigr)_{i=1}^d.
+\]
+Then the reproducing kernel, $K$, is defined by 
+\[
+\bigl ( K(i,j) \bigr)_{i,j=1}^d = \mK := \mA^{-1}.
+\]
+Note that 
+\begin{gather*}
+    K(i,j) = K(j,i) \text{ because $\mA$ is symmetric, and thus so is $\mK$} \\
+    K(\cdot,j) = \text{$j^{\text{th}}$ column of $\mK$} =: \vK_j \in \reals^d = V\\
+    \ip{K(\cdot,j)}{f} = \vK_j^T \mA \vf = \ve_j \vf = f(j) \quad \text{since } \mK := \mA^{-1}
+\end{gather*}
+where $\ve_j := (0, \ldots, 0, \underbrace{1}_{j^{\text{th}} \text{ position}}, 0, \ldots )$
+
+\end{frame}
+
+\begin{frame}[label = CDKH]{An Example of the Cubature Error Bound \cite{Hic97a} \hyperlink{KH}{\beamerreturnbutton{Back}}}
+
 \end{frame}
 
 
@@ -466,28 +545,4 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 
 
 
-
-\begin{frame}{Riesz Representation Theorem for $\reals^d$, Alternative Proof}
-\begin{theorem}
-    If $\LIN: \reals^d \to \reals$ is any linear functional, and $\ip{\vf}{\vh} : = \vf^T \vh$, then there exists a unique $\vg \in \reals^d$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^d$
-\end{theorem}
-\begin{proof}
-\alert{Existence.} Let $\mK$ be the $d$-dimensional identity matrix and let $\vK_j \in \reals^d$ denote its $j^{\text{th}}$ column.  Note that 
-\[
-f_j = \ip{\vK_j}{\vf} \qquad \forall \vf \in \reals^d.
-\]
-Now define $\vg \in \reals^d$ by $g_j = \LIN(\vK_j)$.
-Then for all $\vf = (f_1, \ldots, f_d)^T$,
-    \begin{align*}
-    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \cdots + \ve_d f_d \bigr)  = \LIN(\ve_1) f_1 + \cdots + \LIN(\ve_d) f_d \qquad \text{by linearlity} \\
-    & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \ldots, \LIN(\ve_d) \bigr)^T
-    \end{align*}
-\alert{Uniqueness.} If $\LIN(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
-\[
-0 = \LIN(\vg - \tvg) - \LIN(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
-\]
-so $\vg - \tvg = \vzero$ and $\vg = \tvg$.
-\end{proof}
-    
-\end{frame}
 
