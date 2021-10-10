@@ -225,7 +225,9 @@ Then distance and cosine
     \text{Hilbert space} & = \text{a vector space that is \alert{complete} under } \norm{\cdot}  \\
     & \qquad \text{(sequences that should converge  do)} \\
     & \qquad \text{may be \alert{infinite} dimensional $=$ no finite basis} \\
-    \alert{\text{bounded }} & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})}
+    \alert{\text{bounded }} & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})} \\
+    & \qquad \text{linear $+$ bounded $\implies$ continuous, 
+    	\qquad linear $+$ continuous  $\implies$ bounded}
 \end{align*}
 
 Can we prove this theorem \alert{without referring to a basis} for $V$?}
@@ -386,17 +388,17 @@ Short answer: $V$ must be \alert{infinite dimensional}
 
 \uncover<2>{Consider a vector space of real, valued sequences with the typical inner product:  
 \[
-V := \{(f_1, f_2, \ldots) : f_i \in \reals, \norm{\vf} < \infty \}, \qquad \ip{\vf}{\vh} := f_1 h_1 + f_2h_2 + f_3h_3 + \cdots
+V := \{\vf = (f_1, f_2, \ldots)^T : f_i \in \reals, \norm{\vf} < \infty \}, \qquad \ip{\vf}{\vh} := f_1 h_1 + f_2h_2 + f_3h_3 + \cdots
 \]
 Define the linear real-valued function
 \[
-\LIN(f) = f_1 + 2f_2 + 3f_3 +4f_4 + \cdots
+\LIN(\vf) = f_1 + 2f_2 + 3f_3 +4f_4 + \cdots
 \]
 Let $\ve_i := (0, \ldots, 0, \underbrace{1}_{i^{\text{th}} \text{ position}}, 0, \ldots )^T$.  For any $\varepsilon, \delta > 0$, choose $i  > \varepsilon/\delta$.  Then  $\norm{\delta \ve_i} = \delta$, but
 \[
-\sup_{\vf \ne 0} \frac{\abs{\LINEAR(\vf)}}{\norm{\vf}} \ge \sup_{i=1, 2, \ldots}\frac{\abs{\LIN(\delta \ve_i)}}{\norm{\delta \ve_i}}  = \sup_{i=1, 2, \ldots} \frac{i\delta}{\delta} \abs{i \delta} > \varepsilon
+\sup_{\vf \ne 0} \frac{\abs{\LIN(\vf)}}{\norm{\vf}} \ge \sup_{i=1, 2, \ldots}\frac{\abs{\LIN(\delta \ve_i)}}{\norm{\delta \ve_i}}  = \sup_{i=1, 2, \ldots} \frac{i\delta}{\delta} = \sup_{i=1, 2, \ldots} i = \infty
 \]
-You cannot guarantee that $\abs{\LIN(\vf)}$ is small enough, no matter how small you make $\norm{\vf}$.  $\LIN$ is \alert{disbounded}.
+Cannot guarantee that $\abs{\LIN(\vf)}$ is small enough, no matter how small you make $\norm{\vf}$.  This $\LIN$ is \alert{unbounded}.
 
 }
 
