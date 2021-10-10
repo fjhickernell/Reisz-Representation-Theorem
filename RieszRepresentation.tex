@@ -31,17 +31,10 @@
 \setlength{\parskip}{2ex}
 \setlength{\arraycolsep}{0.5ex}
 
-%\renewcommand{\qedsymbol}{}
 
-\DeclareMathOperator{\INT}{INT}
-\DeclareMathOperator{\AVG}{AVG}
-\DeclareMathOperator{\sol}{SOL}
-\DeclareMathOperator{\app}{APP}
-\DeclareMathOperator{\alg}{ALG}
-\DeclareMathOperator{\ACQ}{ACQ}
 \DeclareMathOperator{\ERR}{ERR}
-\DeclareMathOperator{\COST}{COST}
-\DeclareMathOperator{\COMP}{COMP}
+\DeclareMathOperator{\AVG}{AVG}
+\DeclareMathOperator{\INT}{INT}
 \DeclareMathOperator{\LIN}{LINEAR}
 \DeclareMathOperator{\BAD}{BAD}
 \newcommand{\dataN}{\bigl(\hf(\vk_i)\bigr)_{i=1}^n}
@@ -49,27 +42,11 @@
 \newcommand{\dataNjd}{\bigl(\hf(\vk_i)\bigr)_{i=1}^{n_{j^\dagger}}}
 \newcommand{\ERRN}{\ERR\bigl(\dataN,n\bigr)}
 
-\newcommand{\Sapp}{S_{\textup{app}}}
-\newcommand{\LambdaStd}{\Lambda^{\textup{std}}}
-\newcommand{\LambdaSer}{\Lambda^{\textup{ser}}}
-\newcommand{\LambdaAll}{\Lambda^{\textup{all}}}
-\newcommand{\oton}{1\!:\!n}
-\newcommand{\talert}[1]{\alert{\text{#1}}}
-\DeclareMathOperator{\init}{init}
-\DeclareMathOperator{\GP}{\cg\cp}
-\newcommand{\MLE}{\textup{EB}}
-\newcommand{\mCtheta}{{\mathsf{C}_{\vtheta}}}
-\newcommand{\mCInv}{\mathsf{C}^{-1}}
-\newcommand{\tvg}{\widetilde{\vg}}
 
 %\DeclareMathOperator{\app}{app}
 
 \providecommand{\HickernellFJ}{H.\xspace}
 
-
-\iffalse
-
-\fi
 
 \renewcommand{\OffTitleLength}{-7ex}
 \setlength{\FJHThankYouMessageOffset}{-8ex}
@@ -88,35 +65,8 @@
 \input FJHDef.tex
 
 
-\newlength{\figwidth}
-\setlength{\figwidth}{0.25\textwidth}
-
-\newlength{\figwidthSmall}
-\setlength{\figwidthSmall}{0.2\textwidth}
-
-\newcommand{\financePict}{\href{http://i2.cdn.turner.com/money/dam/assets/130611131918-chicago-board-options-exchange-1024x576.jpg}{\includegraphics[width
-		= 3cm]{ProgramsImages/130611131918-chicago-board-options-exchange-1024x576.jpg}}}
-	
-	\newcommand{\scoop}[1]{\parbox{#1}{\includegraphics[width=#1]{IceCreamScoop.eps}}\xspace}
-	\newcommand{\smallscoop}{\scoop{1cm}}
-	\newcommand{\medscoop}{\scoop{1.8cm}}
-	\newcommand{\largescoop}{\scoop{3cm}}
-	\newcommand{\ICcone}[1]{\parbox{#1}{\includegraphics[width=#1,angle=270]{MediumWaffleCone.eps}}\xspace}
-	\newcommand{\medcone}{\ICcone{1.2cm}}
-	\newcommand{\largercone}{\parbox{2.2cm}{\vspace*{-0.2cm}\includegraphics[width=1cm,angle=270]{MediumWaffleCone.eps}}\xspace}
-	\newcommand{\largecone}{\ICcone{1.8cm}}
-	\newcommand{\smallcone}{\parbox{1.1cm}{\includegraphics[width=0.5cm,angle=270]{MediumWaffleCone.eps}}\xspace}
-
-	
-
-\newcommand{\northeaststuff}[3]{
-	\begin{tikzpicture}[remember picture, overlay]
-	\node [shift={(-#1 cm,-#2 cm)}]  at (current page.north east){#3};
-	\end{tikzpicture}}
-
 
 \begin{document}
-	\tikzstyle{every picture}+=[remember picture]
 	\everymath{\displaystyle}
 
 \frame{\titlepage}
@@ -128,19 +78,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Main Idea}
-    What seems \alert{obvious} for $d$-dimensional vectors becomes a power tool for \alert{numerical analysis}
+    What seems \alert{obvious} for two-dimensional vectors becomes a power tool for \alert{numerical analysis}
     
     \begin{description}
     \item[Obvious]<2-> If $\LIN: \reals^2 \to \reals$ is any \alert{linear, real-valued} function, \uncover<2-4>{meaning,
     \[
-    \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^3, \ c \in \reals,
+    \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^2, \ c \in \reals,
     \]}
     then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{:
     \[
     \LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2, \text{ where $\vg \in \reals^2$ is fixed}.
     \]
     \only<2>{The vector $\vg$ corresponds to the \alert{coefficients}.}}
-   \item[Powerful Tool]<3-> Generalization allows us to derive \alert{error bounds} for numerical algorithms, e.g.,
+   \item[Power Tool]<3-> Generalization, \alert{Riesz Representation  Theorem},  gives us \alert{error bounds} for numerical algorithms, e.g.,
    \[
    \biggl\lvert\only<4->{\underbrace}{\int_{[0,1]^d} f(\vx) \, \dif \vx}\only<4->{_{\substack{\text{\alert{average} of $f$} \\ \text{e.g., option price}}} \quad}  - \only<4->{\underbrace}{\frac 1n \sum_{i=1}^n f(\vx_i)}\only<4->{_{\substack{\text{\alert{average} of $f$ values} \\ \text{e.g., payoffs under various scenarios} }}} \biggr\rvert \le \only<5->{\underbrace}{\BAD(\vx_1, \ldots, \vx_n)}\only<5->{_{\Large\substack{\alert{\text{Concentrate on }} \\
    \alert{\text{choosing the $\vx_i$ well}}}}} \, \BAD(\vf)
@@ -148,10 +98,23 @@
     \end{description}
 \end{frame}
 
-\begin{frame}{Why Is this My Favorite Theorem?}
+\begin{frame}<1>[label = whyfavorite]{\only<1>{Why Is this My Favorite Theorem?}\only<2>{Why Do Others Cite This Paper?}}
 \centerline{\includegraphics[width=\textwidth]{ProgramsImages/FredCitationGenDisc.png}}
 
-My most cited paper \cite{Hic97a} is a \alert{simple application} of the Riesz Representation Theorem
+\vspace{-5ex}
+		\[
+		\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
+		\le \BAD(\vx_1, \ldots, \vx_n) \BAD(f),
+		\]
+\only<1>{My most cited paper \cite{Hic97a} is a \alert{simple application} of the Riesz Representation Theorem}%
+\only<2>{You can pick $K$ well and analyze
+		
+		\vspace{-3ex}
+\begin{description}
+    \item[Convergence] How fast $\BAD(\vx_1, \ldots, \vx_n) \to 0$ with $n$ for clever $\vx_1, \vx_2, \ldots$
+     \item[Tractability] How this convergence depends on $d$ 
+\end{description}
+}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -195,13 +158,13 @@ so $\vg - \tvg = \vzero$ and $\vg = \tvg$.}%
 \begin{frame}[label = dotproduct]{The Dot/Inner Product}
 \begin{columns}
 \begin{column}{0.5\textwidth}
-How I learned about $\vf \bigcdot \vh \equiv \ip{\vf}{\vh}$
+My experience with $\vf \bigcdot \vh \equiv \ip{\vf}{\vh}$
 	
 \begin{description}
 \setlength{\itemsep}{3ex}
 \item[Geometry] Distance: $\norm{\vf} := \sqrt{f_1^2 + f_2^2}$
 
-\item[Trigonometry] Define cosine \\
+\item[Trigonometry] 
 Law of cosines: \\
 \hspace{-10ex}$\norm{\vf-\vh}^2 = \norm{\vf}^2 + \norm{\vh}^2 - 2 \norm{\vf}\norm{\vh}\cos(\measuredangle(\vf,\vh))$
 
@@ -213,11 +176,11 @@ $\vf \bigcdot \vh = f_1h_1 + f_2 h_2$
 \begin{column}{0.5\textwidth}
     \only<1>{\begin{center}
      \includegraphics[width=\textwidth]{ProgramsImages/fhfmh.eps}
-     \end{center}}\only<2>{How we \alert{should} think about $\ip{f}{h}$ for arbitrary vectors spaces $V$, e.g., spaces of functions.
+     \end{center}}\only<2>{\alert{Right way} to think about $\ip{f}{h}$ for arbitrary vectors spaces $V$, e.g., spaces of functions.
  
  \medskip
  
-Inner product comes first:  $\ip{\cdot}{\cdot \cdot} :  V \times V \to \reals$ satisfying
+Inner product first:  $\ip{\cdot}{\cdot \cdot} :  V \times V \to \reals$ satisfying
  \vspace{-1.5ex}
  \begin{gather*}
  \ip{0}{0} =0, \quad \ip{f}{f} > 0 \; \forall f \ne 0, \quad
@@ -254,7 +217,7 @@ Then distance and cosine
 	
 	\vspace{-1ex}
 \begin{theorem}[Riesz Representation Theorem for Hilbert Spaces] 
-    If $\LIN: V \to \reals$ is any \alert{continuous} linear real-valued function on the \alert{Hilbert space} $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, dependent on $\LIN$, for which $\LIN(f) =  \ip{g}{f}$ for all $f \in V$.
+    If $\LIN: V \to \reals$ is any \alert{bounded} linear real-valued function on the \alert{Hilbert space} $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, dependent on $\LIN$, for which $\LIN(f) =  \ip{g}{f}$ for all $f \in V$.
 \end{theorem}
 \only<1>{
 \vspace{-5ex}
@@ -262,7 +225,7 @@ Then distance and cosine
     \text{Hilbert space} & = \text{a vector space that is \alert{complete} under } \norm{\cdot}  \\
     & \qquad \text{(sequences that should converge  do)} \\
     & \qquad \text{may be \alert{infinite} dimensional $=$ no finite basis} \\
-    \text{continuous } & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})}
+    \alert{\text{bounded }} & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})}
 \end{align*}
 
 Can we prove this theorem \alert{without referring to a basis} for $V$?}
@@ -306,7 +269,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 	\vspace{-1ex}
 	
 \begin{theorem}[\only<4>{Preliminary }Error Bound for Numerical Integration] 
-	Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$.  Suppose that integration and function evaluation are both continuous, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
+	Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$.  Suppose that integration and function evaluation are both bounded, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
 		\[
     	\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
     				= \abs{\ip{\eta}{f}} = \abs{\cos\bigl(\measuredangle(\eta,f) \bigr)} \norm{\eta} \norm{f} 
@@ -335,7 +298,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 		$
 		\INT : f \mapsto \int_{[0,1]^d} f(\vx) \, \dif \vx \quad$ and $\AVG: f \mapsto \frac 1n \sum_{i=1}^n f(\vx_i)
 		$
-		 are continuous, linear real-valued functions.  \only<3->{Thus, so is $\ERR = \INT - \AVG$.  By the Reisz Representation Theorem, there exists an $\eta \in V$ such that
+		 are bounded, linear real-valued functions.  \only<3->{Thus, so is $\ERR = \INT - \AVG$.  By the Reisz Representation Theorem, there exists an $\eta \in V$ such that
 		 $
 		 \int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i)  = \ERR(f) = \ip{\eta}{f}
 		 $.}
@@ -349,7 +312,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[label = RK]{Reproducing Kernels \cite{Aro50}}
-	Suppose that  $(V,\ip{\cdot}{\cdot})$  is  Hilbert space of functions on $\Omega$ for which function evaluation is a continuous, linear functional.  Then there exists, $K: \Omega \times \Omega \to \reals$ called a \alert{reproducing kernel} for which 
+	Suppose that  $(V,\ip{\cdot}{\cdot})$  is  Hilbert space of functions on $\Omega$ for which function evaluation is a bounded, linear functional.  Then there exists, $K: \Omega \times \Omega \to \reals$ called a \alert{reproducing kernel} for which 
 	\begin{equation*}
 		\underbrace{K(\vt,\vx) = K(\vx,\vt)}_{\text{symmetry}},  \quad \underbrace{K(\cdot,\vx) \in V}_{\text{belonging}}, \quad  \underbrace{f(\vx) = \ip{K(\cdot,\vx)}{f}}_{\text{reproduction}}  \qquad \forall \vt, \vx \in \Omega, \; f \in V
 	\end{equation*}
@@ -377,7 +340,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 	\vspace{-2ex}
 	
 	\begin{theorem}[Error Bound for Numerical Integration] 
-		Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$ with reproducing kernel, $K$.  Suppose that integration and function evaluation are both continuous, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
+		Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$ with reproducing kernel, $K$.  Suppose that integration and function evaluation are both bounded, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
 		\[
 		\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
 		\le \BAD(\vx_1, \ldots, \vx_n) \BAD(f),
@@ -396,9 +359,9 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 	For an explicit example of a $K$ and $\BAD(\vx_1, \ldots, \vx_n)$ \hyperlink{CDKH}{\beamergotobutton{Look here}}
 \end{frame}
 
-\finalthanksnote{These slides are  available at \\  \href{https://speakerdeck.com/fjhickernell/riesz-representation-theorem}{\nolinkurl{speakerdeck.com/fjhickernell/quasi-monte-carlo-software}}}
+\finalthanksnote{These slides are  available at \\  \href{https://speakerdeck.com/fjhickernell/riesz-representation-theorem}{\nolinkurl{speakerdeck.com/riesz-representation-theorem}}}
 
-
+\againframe<2>{whyfavorite}
 \thankyouframe
 
 \begin{frame}{References}
@@ -416,10 +379,10 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}[label=lindisc]{How Can a Linear Function on a Hilbert Space be \emph{Dis}continuous? \hyperlink{generalRiesz}{\beamerreturnbutton{Back}}}
+\begin{frame}[label=lindisc]{How Can a Linear Function on a Hilbert Space be \emph{Un}bounded? \hyperlink{generalRiesz}{\beamerreturnbutton{Back}}}
 
-\vspace{-2ex}
-Short answer: $V$ must be infinite dimensional.
+\vspace{-3ex}
+Short answer: $V$ must be \alert{infinite dimensional}
 
 \uncover<2>{Consider a vector space of real, valued sequences with the typical inner product:  
 \[
@@ -429,11 +392,11 @@ Define the linear real-valued function
 \[
 \LIN(f) = f_1 + 2f_2 + 3f_3 +4f_4 + \cdots
 \]
-Then for $\ve_i := (0, \ldots, 0, \underbrace{1}_{i^{\text{th}} \text{ position}}, 0, \ldots )$, then $\norm{\delta \ve_i} = \delta$, but
+Let $\ve_i := (0, \ldots, 0, \underbrace{1}_{i^{\text{th}} \text{ position}}, 0, \ldots )^T$.  For any $\varepsilon, \delta > 0$, choose $i  > \varepsilon/\delta$.  Then  $\norm{\delta \ve_i} = \delta$, but
 \[
-\sup_{i = 1, 2, \ldots} \abs{\LIN(\delta \ve_i) - \LIN(\vzero)} = \sup_{i = 1, 2, \ldots} \abs{i \delta} = \infty
+\sup_{\vf \ne 0} \frac{\abs{\LINEAR(\vf)}}{\norm{\vf}} \ge \sup_{i=1, 2, \ldots}\frac{\abs{\LIN(\delta \ve_i)}}{\norm{\delta \ve_i}}  = \sup_{i=1, 2, \ldots} \frac{i\delta}{\delta} \abs{i \delta} > \varepsilon
 \]
-No matter how small $\norm{\vf}$ is, you cannot ensure that $\abs{\LIN(\vf)}$ is small enough.
+You cannot guarantee that $\abs{\LIN(\vf)}$ is small enough, no matter how small you make $\norm{\vf}$.  $\LIN$ is \alert{disbounded}.
 
 }
 
@@ -476,7 +439,7 @@ No matter how small $\norm{\vf}$ is, you cannot ensure that $\abs{\LIN(\vf)}$ is
 \begin{frame}[label = lemma]{There Exists a Nonzero $g_\perp$ Orthogonal to All of $\ker(V)$ \hyperlink{backfromhowpick}{\beamerreturnbutton{Back}}}
 \vspace{-0.5ex}
 	\begin{lemma}
-		If $\LIN: V \to \reals$ is any \alert{continuous}, linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(\LIN) := \LIN^{-1}(\{0\}) = \{f \in V : \LIN(f) = 0\} \ne V$,
+		If $\LIN: V \to \reals$ is any \alert{bounded}, linear functional on the Hilbert space $(V,\ip{\cdot}{\cdot})$, and $\ker(\LIN) := \LIN^{-1}(\{0\}) = \{f \in V : \LIN(f) = 0\} \ne V$,
 		then there exists a nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(\LIN)\}$.
 	\end{lemma}
 	\vspace{-1ex}
@@ -518,7 +481,7 @@ No matter how small $\norm{\vf}$ is, you cannot ensure that $\abs{\LIN(\vf)}$ is
 \begin{frame}[label = RKRd]{What Does a Reproducing Kernel Look Like for $V =\reals^d$? \hyperlink{RK}{\beamerreturnbutton{Back}}}
 
 \vspace{-3ex}
-In this case, the functions have domain $\Omega := \{1, \ldots, d\}$, and we represent them as vectors of matrices.  Pick a symmetric, positive definite (all eigenvalues are positive) matrix $\mA \in \reals^{d \times d}$ to define the inner product
+The functions have domain $\Omega := \{1, \ldots, d\}$, and are represented as vectors of matrices.  Pick a symmetric, positive definite (all eigenvalues are positive) matrix $\mA \in \reals^{d \times d}$ to define the inner product
 \[
 \ip{f}{h} : = \vf^T \mA \vh, \qquad \text{where } \vf = \bigl(f(i) \bigr)_{i=1}^d.
 \]
@@ -528,16 +491,39 @@ Then the reproducing kernel, $K$, is defined by
 \]
 Note that 
 \begin{gather*}
-    K(i,j) = K(j,i) \text{ because $\mA$ is symmetric, and thus so is $\mK$} \\
+    K(i,j) = K(j,i) \text{ because $\mA$ is symmetric and thus so is $\mK$} \\
     K(\cdot,j) = \text{$j^{\text{th}}$ column of $\mK$} =: \vK_j \in \reals^d = V\\
     \ip{K(\cdot,j)}{f} = \vK_j^T \mA \vf = \ve_j \vf = f(j) \quad \text{since } \mK := \mA^{-1}
 \end{gather*}
-where $\ve_j := (0, \ldots, 0, \underbrace{1}_{j^{\text{th}} \text{ position}}, 0, \ldots )$
+where $\ve_j := (0, \ldots, 0, \underbrace{1}_{j^{\text{th}} \text{ position}}, 0, \ldots )^T$
 
 \end{frame}
 
 \begin{frame}[label = CDKH]{An Example of the Cubature Error Bound \cite{Hic97a} \hyperlink{KH}{\beamerreturnbutton{Back}}}
 
+\vspace{-4ex}
+Consider the reproducing kernel
+\[
+K(\vt,\vx) : = \prod_{k=1}^d \Bigl[ 1 + \frac 12 \bigl\{ \abs{t_k - 1/2} + \abs{x_k -1/2} - \abs{t_k-x_k} \bigr\} \Bigr] \qquad \vt, \vx \in [0,1]^d
+\]
+\only<1>{
+Then
+\begin{multline*}
+\BAD^2(\vx_1, \ldots, \vx_n) = \left(\frac{13}{12}\right)^d - \frac 2n \sum_{i=1}^n \prod_{k=1}^d \Bigl[ 1 + \frac 12 \bigl\{ \abs{x_{ik} - 1/2} - \abs{x_{ik}-1/2}^2 \bigr\} \Bigr] \\
++ \frac 1{n^2} \sum_{i,j=1}^n\prod_{k=1}^d \Bigl[ 1 + \frac 12 \bigl\{ \abs{x_{ik} - 1/2} + \abs{x_{jk} -1/2} - \abs{x_{ik}-x_{jk}} \bigr\}
+\end{multline*}
+Requires $\Order(dn^2)$ operations to compute}
+\only<2>{which corresponds to the Hilbert space for functions defined on $[0,1]^d$ with the following norm:
+\begin{multline*}
+\norm{f}^2 : = \abs{f(1/2, \ldots, 1/2)}^2 \\
++ \int_{[0,1]} \abs{\frac{\partial f}{\partial x_1}(x_1, 1/2, \ldots, 1/2)}^2 \, \dif x_1 + \int_{[0,1]} \abs{\frac{\partial f}{\partial x_1}(1/2, x_2, 1/2, \ldots, 1/2)}^2 \, \dif x_2 + \cdots \\
++ \int_{[0,1]^2} \abs{\frac{\partial^2 f}{\partial x_1 \partial x_2}(x_1, x_2,1/2, \ldots, 1/2)}^2 \, \dif x_1\dif x_2 + \cdots 
++ \int_{[0,1]^d} \abs{\frac{\partial^d f}{\partial x_1 \cdots \partial x_d}(\vx)}^2 \, \dif \vx
+\end{multline*}
+\[
+\BAD(f) = \norm{f - f(1/2, \ldots, 1/2)}
+\]
+}
 \end{frame}
 
 
