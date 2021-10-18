@@ -1,3 +1,4 @@
+
 %Talk given virtually for SIAM UQ 2020 March
 \documentclass[10pt,compress,xcolor={usenames,dvipsnames},aspectratio=169]{beamer}
 %\documentclass[xcolor={usenames,dvipsnames},aspectratio=169]{beamer} %slides and 
@@ -78,6 +79,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Main Idea}
+
+\vspace{-3ex}
     What seems \alert{obvious} for two-dimensional vectors becomes a power tool for \alert{numerical analysis}
     
     \begin{description}
@@ -87,12 +90,12 @@
     \]}
     then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{:
     \[
-    \LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2, \text{ where $\vg \in \reals^2$ is fixed}.
+    \exists \vg \in \reals^2 \text{ such that }\LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2.
     \]
     \only<2>{The vector $\vg$ corresponds to the \alert{coefficients}.}}
    \item[Power Tool]<3-> Generalization, \alert{Riesz Representation  Theorem},  gives us \alert{error bounds} for numerical algorithms, e.g.,
    \[
-   \biggl\lvert\only<4->{\underbrace}{\int_{[0,1]^d} f(\vx) \, \dif \vx}\only<4->{_{\substack{\text{\alert{average} of $f$} \\ \text{e.g., option price}}} \quad}  - \only<4->{\underbrace}{\frac 1n \sum_{i=1}^n f(\vx_i)}\only<4->{_{\substack{\text{\alert{average} of $f$ values} \\ \text{e.g., payoffs under various scenarios} }}} \biggr\rvert \le \only<5->{\underbrace}{\BAD(\vx_1, \ldots, \vx_n)}\only<5->{_{\Large\substack{\alert{\text{Concentrate on }} \\
+   \biggl\lvert\overbrace{\only<4->{\underbrace}{\int_{[0,1]^d} f(\vx) \, \dif \vx}\only<4->{_{\substack{\text{\alert{average} of $f$} \\ \text{e.g., option price}}} \quad}  - \only<4->{\underbrace}{\frac 1n \sum_{i=1}^n f(\vx_i)}\only<4->{_{\substack{\text{\alert{average} of $f$ values} \\ \text{e.g., payoffs under various scenarios} }}}}^{\LIN(f)} \biggr\rvert \le \only<5->{\underbrace}{\BAD(\vx_1, \ldots, \vx_n)}\only<5->{_{\Large\substack{\alert{\text{Concentrate on }} \\
    \alert{\text{choosing the $\vx_i$ well}}}}} \, \BAD(\vf)
    \]
     \end{description}
@@ -106,8 +109,8 @@
 		\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
 		\le \BAD(\vx_1, \ldots, \vx_n) \BAD(f),
 		\]
-\only<1>{My most cited paper \cite{Hic97a} is a \alert{simple application} of the Riesz Representation Theorem}%
-\only<2>{You can pick $K$ well and analyze
+\only<1>{My most cited paper \cite{Hic97a} according to \href{https://scholar.google.com/citations?user=dJbMJG8AAAAJ&hl=en}{\beamergotobutton{Google Scholar}} is a \alert{simple application} of the Riesz Representation Theorem}%
+\only<2>{You can pick \alert{reproducing kernel} $K$ well and analyze
 		
 		\vspace{-3ex}
 \begin{description}
@@ -162,7 +165,7 @@ My experience with $\vf \bigcdot \vh \equiv \ip{\vf}{\vh}$
 	
 \begin{description}
 \setlength{\itemsep}{3ex}
-\item[Geometry] Distance: $\norm{\vf} := \sqrt{f_1^2 + f_2^2}$
+\item[Geometry] (Euclidean) distance: $\norm{\vf} := \sqrt{f_1^2 + f_2^2}$
 
 \item[Trigonometry] 
 Law of cosines: \\
@@ -180,7 +183,7 @@ $\vf \bigcdot \vh = f_1h_1 + f_2 h_2$
  
  \medskip
  
-Inner product first:  $\ip{\cdot}{\cdot} :  V \times V \to \reals$ satisfying
+Inner product \alert{first}:  $\ip{\cdot}{\cdot} :  V \times V \to \reals$ satisfying
  \vspace{-1.5ex}
  \begin{gather*}
  \ip{0}{0} =0, \quad \ip{f}{f} > 0 \; \forall f \ne 0, \quad
@@ -217,14 +220,14 @@ Then distance and cosine
 	
 	\vspace{-1ex}
 \begin{theorem}[Riesz Representation Theorem for Hilbert Spaces] 
-    If $\LIN: V \to \reals$ is any \alert{bounded} linear real-valued function on the \alert{Hilbert space} $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, dependent on $\LIN$, for which $\LIN(f) =  \ip{g}{f}$ for all $f \in V$.
+    If $\LIN: V \to \reals$ is any \alert{bounded} linear real-valued function on the \alert{Hilbert space} $(V,\ip{\cdot}{\cdot})$, then there \alert{exists a unique} $g \in V$, called the \alert{representer} of $\LIN$, for which $\LIN(f) =  \ip{g}{f}$ for all $f \in V$.
 \end{theorem}
 \only<1>{
 \vspace{-5ex}
 \begin{align*}
     \text{Hilbert space} & = \text{a vector space that is \alert{complete} under } \norm{\cdot}  \\
-    & \qquad \text{(sequences that should converge  do)} \\
-    & \qquad \text{may be \alert{infinite} dimensional $=$ no finite basis} \\
+    & \qquad \text{(sequences that should converge  do); $\reals$ is complete, $\mathbb{Q}$ is not} \\
+    & \qquad \text{may be \alert{infinite} dimensional, e.g., all $f:[0,1] \to \reals$ with a first derivative} \\
     \alert{\text{bounded }} & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})} \\
     & \qquad \text{linear $+$ bounded $\implies$ continuous, 
     	\qquad linear $+$ continuous  $\implies$ bounded}
@@ -232,9 +235,9 @@ Then distance and cosine
 
 Can we prove this theorem \alert{without referring to a basis} for $V$?}
 \only<2->{\begin{proof}
-\alert{Existence.} \only<2-5>{Define $\ker(\LIN) = \{f \in V : \LIN(f) = 0\}$ as the \only<2>{ $\dim(V) - 1$ dimensional }subspace of $V$ that $\LIN$ maps into $0$. \only<2>{If $\ker(\LIN) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$.}\only<3->{$\ker(\LIN) = V$ is easy.  Otherwise, pick any nonzero $g_\perp \in \{ h \in V : \ip{h}{f} = 0 \ \forall f \in \ker(\LIN)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}\hypertarget<3>{backfromhowpick}{}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(\LIN)$.  \uncover<4->{ For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that}}
+\alert{Existence.} \only<2-5>{Define $\ker(\LIN) = \{f \in V : \LIN(f) = 0\}$ as the subspace of $V$ that $\LIN$ maps into $0$. If $\ker(\LIN) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$. \only<3->{Otherwise, pick any nonzero $g_\perp \in \{ u \in V : \ip{u}{v} = 0 \ \forall v \in \ker(\LIN)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}\hypertarget<3>{backfromhowpick}{}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(\LIN)$.  \uncover<4->{ For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that}}
 
-\only<3->{\vspace{-3ex}}
+\only<3->{\vspace{-2ex}}
 \begin{tabular}{m{0.7\textwidth}m{0.3\textwidth}}
 \uncover<4->{\[
 \begin{aligned}
@@ -277,7 +280,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
     				= \abs{\ip{\eta}{f}} = \abs{\cos\bigl(\measuredangle(\eta,f) \bigr)} \norm{\eta} \norm{f} 
     				\le \norm{\eta} \norm{f} \qquad \forall f \in V,
 		\]
-		for some  $\eta \in V$ that depends on $\vx_1, \ldots, \vx_n$, but not on $f$.
+		for some \alert{representer}  $\eta \in V$ that depends on $\vx_1, \ldots, \vx_n$, but not on $f$.
 
 	\end{theorem}
 	
@@ -291,14 +294,14 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 	
 	\item Algorithm developers can concentrate on making $\norm{\eta}$ small
 	
-	\item  Providential if  $\eta$ is nearly orthogonal to $f$ \cite{Hic17a}
+	\item  Providential if  $\eta$ is nearly orthogonal to $f$ \cite{Hic17a}, but don't count on it
 	
 	\item<4> \alert{How to find $\eta$?}
 \end{itemize}}
 \only<2,3>{\begin{proof}
 		Note that 
 		$
-		\INT : f \mapsto \int_{[0,1]^d} f(\vx) \, \dif \vx \quad$ and $\AVG: f \mapsto \frac 1n \sum_{i=1}^n f(\vx_i)
+		\INT : f \mapsto \int_{[0,1]^d} f(\vx) \, \dif \vx$ and $\AVG: f \mapsto \frac 1n \sum_{i=1}^n f(\vx_i)
 		$
 		 are bounded, linear real-valued functions.  \only<3->{Thus, so is $\ERR = \INT - \AVG$.  By the Reisz Representation Theorem, there exists an $\eta \in V$ such that
 		 $
@@ -323,9 +326,9 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 \begin{gather*}
 	\ERR(f) := \int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) 
 	= \ip{\eta}{f}, \qquad \eta = ?\\
-	\eta(\vx) = \ip{K(\cdot,\vx)}{\eta} =  \ip{\eta}{K(\cdot,\vx)} = \ERR\bigl(K(\cdot,\vx)\bigr) 
+	\eta(\vx) \underbrace{=}_{\text{reproduction}} \ip{K(\cdot,\vx)}{\eta} \underbrace{=}_{\text{symmetry}}  \ip{\eta}{K(\cdot,\vx)} \underbrace{=}_{\text{representer}} \ERR\bigl(K(\cdot,\vx)\bigr) 
 	\uncover<3->{= \int_{[0,1]^d} K(\vt,\vx) \, \dif \vt- \frac 1n \sum_{i=1}^n K(\vx_i,\vx) \\
-		\uncover<4->{\norm{\eta}^2 = \ip{\eta}{\eta} = \ERR(\eta) 
+		\uncover<4->{\norm{\eta}^2 = \ip{\eta}{\eta} \underbrace{=}_{\text{representer}} \ERR(\eta) 
 			\uncover<5->{= \int_{[0,1]^{2d}} K(\vt,\vx) \, \dif \vt \, \dif \vx
 				-  \frac 2n \sum_{i=1}^n \int_{[0,1]^d} K(\vx_i,\vx)  \, \dif \vx 
 				+  \frac 1{n^2} \sum_{i,j=1}^n K(\vx_i,\vx_j)
