@@ -54,13 +54,15 @@
 \title{My Favorite Theorem: \\ The Reisz Representation Theorem}
 \author[]{Fred J. Hickernell}
 \institute{Department of Applied Mathematics \&
-	Center for Interdisciplinary Scientific Computation \\  Illinois Institute of Technology \quad
+	Center for Interdisciplinary Scientific Computation \\
+	\& Office of Research \\  Illinois Institute of Technology \quad
 	\href{mailto:hickernell@iit.edu}{\url{hickernell@iit.edu}} \quad
 	\href{http://mypages.iit.edu/~hickernell}{\url{mypages.iit.edu/~hickernell}}}
 
-\thanksnote{Thanks to the Illinois Tech Student Chapter for the invitation}
+\thanksnote{Thanks to the Illinois Tech Student Chapter for the invitation \\
+Please interrupt and ask questions}
 	
-\event{My Favorite Theorem}
+%\event{Happy Fred}
 \date[]{October 19, 2021}
 
 \input FJHDef.tex
@@ -88,14 +90,13 @@
     \[
     \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^2, \ c \in \reals,
     \]}
-    then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{:
+    then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{: $\exists$ \alert{coefficient} $\vg \in \reals^2$ such that 
     \[
-    \exists \vg \in \reals^2 \text{ such that }\LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2.
-    \]
-    \only<2>{The vector $\vg$ corresponds to the \alert{coefficients}.}}
+    \LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2.
+    \]}
    \item[Power Tool]<3-> Generalization, \alert{Riesz Representation  Theorem},  gives us \alert{error bounds} for numerical algorithms, e.g.,
    \[
-   \biggl\lvert\overbrace{\only<4->{\underbrace}{\int_{[0,1]^d} f(\vx) \, \dif \vx}\only<4->{_{\substack{\text{\alert{average} of $f$} \\ \text{e.g., option price}}} \quad}  - \only<4->{\underbrace}{\frac 1n \sum_{i=1}^n f(\vx_i)}\only<4->{_{\substack{\text{\alert{average} of $f$ values} \\ \text{e.g., payoffs under various scenarios} }}}}^{\LIN(f)} \biggr\rvert \le \only<5->{\underbrace}{\BAD(\vx_1, \ldots, \vx_n)}\only<5->{_{\Large\substack{\alert{\text{Concentrate on }} \\
+   \biggl\lvert\overbrace{\only<4->{\underbrace}{\int_{[0,1]^d} f(\vt) \, \dif \vt}\only<4->{_{\substack{\text{\alert{average} of $f$} \\ \text{e.g., option price}}} \quad}  - \only<4->{\underbrace}{\frac 1n \sum_{i=1}^n f(\vx_i)}\only<4->{_{\substack{\text{\alert{average} of $f$ values} \\ \text{e.g., payoffs under various scenarios} }}}}^{\LIN(f)} \biggr\rvert \le \only<5->{\underbrace}{\BAD(\vx_1, \ldots, \vx_n)}\only<5->{_{\Large\substack{\alert{\text{Concentrate on }} \\
    \alert{\text{choosing the $\vx_i$ well}}}}} \, \BAD(\vf)
    \]
     \end{description}
@@ -106,7 +107,7 @@
 
 \vspace{-5ex}
 		\[
-		\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
+		\abs{\int_{[0,1]^d} f(\vt) \, \dif \vt - \frac 1n \sum_{i=1}^n f(\vx_i) }
 		\le \BAD(\vx_1, \ldots, \vx_n) \BAD(f),
 		\]
 \only<1>{My most cited paper \cite{Hic97a} according to \href{https://scholar.google.com/citations?user=dJbMJG8AAAAJ&hl=en}{\beamergotobutton{Google Scholar}} is a \alert{simple application} of the Riesz Representation Theorem}%
@@ -165,7 +166,8 @@ My experience with $\vf \bigcdot \vh \equiv \ip{\vf}{\vh}$
 	
 \begin{description}
 \setlength{\itemsep}{3ex}
-\item[Geometry] (Euclidean) distance: $\norm{\vf} := \sqrt{f_1^2 + f_2^2}$
+\item[Geometry] (Euclidean, crow flies) distance/size/length/norm: $\norm{\vf} := \sqrt{f_1^2 + f_2^2}$ \\
+Pythagorean Theorem
 
 \item[Trigonometry] 
 Law of cosines: \\
@@ -225,8 +227,9 @@ Then distance and cosine
 \only<1>{
 \vspace{-5ex}
 \begin{align*}
-    \text{Hilbert space} & = \text{a vector space that is \alert{complete} under } \norm{\cdot}  \\
-    & \qquad \text{(sequences that should converge  do); $\reals$ is complete, $\mathbb{Q}$ is not} \\
+    \text{Hilbert space} & = \text{a vector space (can add vectors and multiply them by scalars)} \\
+    & \qquad \text{that is \alert{complete} under } \norm{\cdot}  \text{(sequences that should converge  do)}\\
+    & \qquad \text{$\reals$ is complete, $\mathbb{Q}$ is not} \\
     & \qquad \text{may be \alert{infinite} dimensional, e.g., all $f:[0,1] \to \reals$ with a first derivative} \\
     \alert{\text{bounded }} & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})} \\
     & \qquad \text{linear $+$ bounded $\implies$ continuous, 
@@ -235,7 +238,7 @@ Then distance and cosine
 
 Can we prove this theorem \alert{without referring to a basis} for $V$?}
 \only<2->{\begin{proof}
-\alert{Existence.} \only<2-5>{Define $\ker(\LIN) = \{f \in V : \LIN(f) = 0\}$ as the subspace of $V$ that $\LIN$ maps into $0$. If $\ker(\LIN) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$. \only<3->{Otherwise, pick any nonzero $g_\perp \in \{ u \in V : \ip{u}{v} = 0 \ \forall v \in \ker(\LIN)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}\hypertarget<3>{backfromhowpick}{}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(\LIN)$.  \uncover<4->{ For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that}}
+\alert{Existence.} \only<2-5>{Define $\ker(\LIN) = \{v \in V : \LIN(v) = 0\}$ as the subspace of $V$ that $\LIN$ maps into $0$. If $\ker(\LIN) = V$, then all vectors in $V$ are mapped to $0$ and $g = 0$. \only<3->{Otherwise, pick any nonzero $g_\perp \in \{ u \in V : \ip{u}{v} = 0 \ \forall v \in \ker(\LIN)\}$ \hyperlink{lemma}{\beamergotobutton{How?}}\hypertarget<3>{backfromhowpick}{}, i.e., $g_\perp$ is orthogonal to all vectors in $\ker(\LIN)$.  \uncover<4->{ For any $f \in V$, let $h = \LIN(f) g_\perp - \LIN(g_\perp)f$, and note that}}
 
 \only<3->{\vspace{-2ex}}
 \begin{tabular}{m{0.7\textwidth}m{0.3\textwidth}}
@@ -276,7 +279,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 \begin{theorem}[\only<4>{Preliminary }Error Bound for Numerical Integration] 
 	Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$.  Suppose that integration and function evaluation are both bounded, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
 		\[
-    	\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
+    	\abs{\int_{[0,1]^d} f(\vt) \, \dif \vt - \frac 1n \sum_{i=1}^n f(\vx_i) }
     				= \abs{\ip{\eta}{f}} = \abs{\cos\bigl(\measuredangle(\eta,f) \bigr)} \norm{\eta} \norm{f} 
     				\le \norm{\eta} \norm{f} \qquad \forall f \in V,
 		\]
@@ -301,11 +304,11 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 \only<2,3>{\begin{proof}
 		Note that 
 		$
-		\INT : f \mapsto \int_{[0,1]^d} f(\vx) \, \dif \vx$ and $\AVG: f \mapsto \frac 1n \sum_{i=1}^n f(\vx_i)
+		\INT : f \mapsto \int_{[0,1]^d} f(\vt) \, \dif \vt$ and $\AVG: f \mapsto \frac 1n \sum_{i=1}^n f(\vx_i)
 		$
 		 are bounded, linear real-valued functions.  \only<3->{Thus, so is $\ERR = \INT - \AVG$.  By the Reisz Representation Theorem, there exists an $\eta \in V$ such that
 		 $
-		 \int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i)  = \ERR(f) = \ip{\eta}{f}
+		 \int_{[0,1]^d} f(\vt) \, \dif \vt - \frac 1n \sum_{i=1}^n f(\vx_i)  = \ERR(f) = \ip{\eta}{f}
 		 $.}
 	\end{proof}}
 \end{frame}
@@ -324,7 +327,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 	\only<1>{What do reproducing kernels look like for $V=\reals^d$ \hyperlink{RKRd}{\beamergotobutton{Look here}}}
 \uncover<2->{Combining with the Riesz Reproduction Theorem
 \begin{gather*}
-	\ERR(f) := \int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) 
+	\ERR(f) := \int_{[0,1]^d} f(\vt) \, \dif \vt - \frac 1n \sum_{i=1}^n f(\vx_i) 
 	= \ip{\eta}{f}, \qquad \eta = ?\\
 	\eta(\vx) \underbrace{=}_{\text{reproduction}} \ip{K(\cdot,\vx)}{\eta} \underbrace{=}_{\text{symmetry}}  \ip{\eta}{K(\cdot,\vx)} \underbrace{=}_{\text{representer}} \ERR\bigl(K(\cdot,\vx)\bigr) 
 	\uncover<3->{= \int_{[0,1]^d} K(\vt,\vx) \, \dif \vt- \frac 1n \sum_{i=1}^n K(\vx_i,\vx) \\
@@ -347,7 +350,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 	\begin{theorem}[Error Bound for Numerical Integration] 
 		Let $(V,\ip{\cdot}{\cdot})$ be a Hilbert space of functions on $[0,1]^d$ with reproducing kernel, $K$.  Suppose that integration and function evaluation are both bounded, linear real-valued functions on $V$.  Then the error of approximating the integral of a function in $V$ by the sample mean is
 		\[
-		\abs{\int_{[0,1]^d} f(\vx) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
+		\abs{\int_{[0,1]^d} f(\vt) \, \dif \vx - \frac 1n \sum_{i=1}^n f(\vx_i) }
 		\le \BAD(\vx_1, \ldots, \vx_n) \BAD(f),
 		\]
 		where 

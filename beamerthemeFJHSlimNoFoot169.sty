@@ -23,7 +23,7 @@
 \def\insertthanksnote{}
 \newcommand{\thanksnote}[1]{\def\insertthanksnote{#1}}
 \def\insertevent{}
-\newcommand{\event}[1]{\def\insertevent{#1}}
+\newcommand{\event}[1]{\def\insertevent{#1, }}
 \setbeamerfont{section in head/foot}{size=\scriptsize,series=\normalfont}
 \setbeamerfont{footer}{size=\scriptsize,series=\normalfont}
 \setbeamerfont{frametitle}{size=\Large}
@@ -101,7 +101,7 @@
     {\usebeamerfont{author}\usebeamercolor[bg]{title}\textbf{\insertauthor}} \\
     {\usebeamerfont{institute}\usebeamercolor[bg]{title} \insertinstitute} \par
     {\usebeamerfont{institute}\usebeamercolor[bg]{title} \insertthanksnote} \par
-    {\usebeamerfont{institute}\usebeamercolor[bg]{title} \insertevent, \insertdate} \par
+    {\usebeamerfont{institute}\usebeamercolor[bg]{title} \insertevent \insertdate} \par
   \endgroup
   %\vfill
 }
