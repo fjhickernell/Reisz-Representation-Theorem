@@ -92,11 +92,11 @@ Please interrupt and ask questions}
     \[
     \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^2, \ c \in \reals,
     \]}
-    then we can represent $\LIN(\vf)$ as an \alert{inner product}\uncover<2-4>{: $\exists$ \alert{coefficient} $\vg \in \reals^2$ such that 
+    then $\LIN(\vf)$ can be represented as an \alert{inner product}\uncover<2-4>{: $\exists$ \alert{coefficient} $\vg \in \reals^2$ such that 
     \[
     \LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2.
     \]}
-   \item[Power Tool]<3-> Generalization, \alert{Riesz Representation  Theorem},  gives us \alert{error bounds} for numerical algorithms, e.g.,
+   \item[Power Tool]<3-> Generalization---\alert{Riesz Representation  Theorem}---gives \alert{error bounds} for numerical algorithms, e.g.,
    \[
    \biggl\lvert\overbrace{\only<4->{\underbrace}{\int_{[0,1]^d} f(\vt) \, \dif \vt}\only<4->{_{\substack{\text{\alert{average} of $f$} \\ \text{e.g., option price}}} \quad}  - \only<4->{\underbrace}{\frac 1n \sum_{i=1}^n f(\vx_i)}\only<4->{_{\substack{\text{\alert{average} of $f$ values} \\ \text{e.g., payoffs under various scenarios} }}}}^{\LIN(f)} \biggr\rvert \le \only<5->{\underbrace}{\BAD(\vx_1, \ldots, \vx_n)}\only<5->{_{\Large\substack{\alert{\text{Concentrate on }} \\
    \alert{\text{choosing the $\vx_i$ well}}}}} \, \BAD(\vf)
@@ -229,7 +229,7 @@ Then distance and cosine
 \only<1>{
 \vspace{-5ex}
 \begin{align*}
-    \text{Hilbert space} & = \text{a vector space (can add vectors and multiply them by scalars)} \\
+    \text{Hilbert space} & = \text{a vector space (vectors can be added and multiplied by scalars)} \\
     & \qquad \text{that is \alert{complete} under } \norm{\cdot}  \text{(sequences that should converge  do)}\\
     & \qquad \text{e.g., $\reals$ is complete, $\mathbb{Q}$ is not} \\
     & \qquad \text{may be \alert{infinite} dimensional, e.g., all $f:[0,1] \to \reals$ with a first derivative} \\
@@ -322,7 +322,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[label = RK]{Reproducing Kernels \cite{Aro50}}
-	Suppose that  $(V,\ip{\cdot}{\cdot})$  is  Hilbert space of functions on $\Omega$ for which function evaluation is a bounded, linear functional.  Then there exists, $K: \Omega \times \Omega \to \reals$ called a \alert{reproducing kernel} for which 
+	Suppose that  $(V,\ip{\cdot}{\cdot})$  is  Hilbert space of functions on $\Omega$ for which \alert{function evaluation is a bounded}, linear functional.  Then there exists, $K: \Omega \times \Omega \to \reals$ called a \alert{reproducing kernel} for which 
 	\begin{equation*}
 		\underbrace{K(\vt,\vx) = K(\vx,\vt)}_{\text{symmetry}},  \quad \underbrace{K(\cdot,\vx) \in V}_{\text{belonging}}, \quad  \underbrace{f(\vx) = \ip{K(\cdot,\vx)}{f}}_{\text{reproduction}}  \qquad \forall \vt, \vx \in \Omega, \; f \in V
 	\end{equation*}
