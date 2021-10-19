@@ -53,10 +53,11 @@
 \setlength{\FJHThankYouMessageOffset}{-8ex}
 \title{My Favorite Theorem: \\ The Reisz Representation Theorem}
 \author[]{Fred J. Hickernell}
-\institute{Department of Applied Mathematics \&
+\institute{Department of Applied Mathematics \qquad
 	Center for Interdisciplinary Scientific Computation \\
-	\& Office of Research \\  Illinois Institute of Technology \quad
-	\href{mailto:hickernell@iit.edu}{\url{hickernell@iit.edu}} \quad
+	Office of Research \\  
+	Illinois Institute of Technology \qquad
+	\href{mailto:hickernell@iit.edu}{\url{hickernell@iit.edu}} \qquad
 	\href{http://mypages.iit.edu/~hickernell}{\url{mypages.iit.edu/~hickernell}}}
 
 \thanksnote{Thanks to the Illinois Tech Student Chapter for the invitation \\
@@ -90,7 +91,7 @@ Please interrupt and ask questions}
     \[
     \LIN(c\vf + \vh) = c \LIN(\vf) + \LIN(\vh) \qquad \forall \vf, \vh \in \reals^2, \ c \in \reals,
     \]}
-    then we can represent $\LIN(f)$ as an \alert{inner product}\uncover<2-4>{: $\exists$ \alert{coefficient} $\vg \in \reals^2$ such that 
+    then we can represent $\LIN(\vf)$ as an \alert{inner product}\uncover<2-4>{: $\exists$ \alert{coefficient} $\vg \in \reals^2$ such that 
     \[
     \LIN(\vf) = g_1 f_1 + g_2 f_2 = \vg^T \vf =: \ip{\vg}{\vf} \equiv \vg \bigcdot \vf \quad \forall \vf \in \reals^2.
     \]}
@@ -129,17 +130,17 @@ Please interrupt and ask questions}
 
 \begin{frame}{Riesz Representation Theorem for $\reals^2$}
 \begin{theorem}
-    If $\LIN: \reals^2 \to \reals$ is any linear, real-valued function, and $\ip{\vh}{\vf} : = h_1 f_1 + h_2 f_2  = \vh^T \vf$, then there exists a unique $\vg \in \reals^2$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^2$
+    If $\LIN: \reals^2 \to \reals$ is any linear, real-valued function, and $\ip{\vh}{\vf} : = h_1 f_1 + h_2 f_2  = \vh^T \vf$, then there exists a unique \alert{representer} $\vg \in \reals^2$, dependent on $\LIN$, for which $\LIN(\vf) =  \ip{\vg}{\vf}$ for all $\vf \in \reals^2$.
 \end{theorem}
 \begin{proof}
 \alert{Existence.} \only<1,2>{Let $\ve_1 = (1,0)^T$ and  $\ve_2 = (0,1)^T$.  Then for all $\vf = (f_1, f_2)^T$,
     \begin{align*}
-    \LIN(\vf) &= L\bigl( \ve_1 f_1 + \ve_2 f_2 \bigr)  = \LIN(\ve_1) f_1 + \LIN(\ve_2) f_2  \qquad \text{by linearity} \\
+    \LIN(\vf) &= \LIN\bigl( \ve_1 f_1 + \ve_2 f_2 \bigr)  = \LIN(\ve_1) f_1 + \LIN(\ve_2) f_2  \qquad \text{by linearity} \\
     & = \ip{\vg}{\vf}, \qquad \text{where } \vg = \bigl( \LIN(\ve_1), \LIN(\ve_2) \bigr)^T \qedhere
     \end{align*} \vspace{-3.8ex}\phantom{a}}%
     \only<3->{Done.
     
-\alert{Uniqueness.} If $\LIN(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
+\alert{Uniqueness.} If $\vg$ and $\tvg$ are both representers, i.e.,$\LIN(\vf) =  \ip{\vg}{\vf} =  \ip{\tvg}{\vf}$ for all $\vf \in \reals^d$, then 
 \[
 0 = \LIN(\vg - \tvg) - \LIN(\vg - \tvg)= \ip{\vg}{\vg - \tvg} - \ip{\tvg}{\vg - \tvg} = \ip{\vg - \tvg}{\vg - \tvg} = \norm{\vg - \tvg}^2
 \]
@@ -147,7 +148,7 @@ so $\vg - \tvg = \vzero$ and $\vg = \tvg$.}%
 \end{proof}
 \only<2>{\noindent \alert{Example.} If $\LIN(\ve_1) = -3$ and $\LIN(\ve_2) = 2$, then
 \[
-\LIN(\vf) = -3f_1, +2 f_2.
+\LIN(\vf) = -3f_1, +2 f_2 = \ip{(-3,2)^T}{\vf}.
 \]
 }
 \end{frame}
@@ -166,7 +167,7 @@ My experience with $\vf \bigcdot \vh \equiv \ip{\vf}{\vh}$
 	
 \begin{description}
 \setlength{\itemsep}{3ex}
-\item[Geometry] (Euclidean, crow flies) distance/size/length/norm: $\norm{\vf} := \sqrt{f_1^2 + f_2^2}$ \\
+\item[Geometry] (Euclidean, crow flying) distance/size/length/norm: $\norm{\vf} := \sqrt{f_1^2 + f_2^2}$ \\
 Pythagorean Theorem
 
 \item[Trigonometry] 
@@ -229,7 +230,7 @@ Then distance and cosine
 \begin{align*}
     \text{Hilbert space} & = \text{a vector space (can add vectors and multiply them by scalars)} \\
     & \qquad \text{that is \alert{complete} under } \norm{\cdot}  \text{(sequences that should converge  do)}\\
-    & \qquad \text{$\reals$ is complete, $\mathbb{Q}$ is not} \\
+    & \qquad \text{e.g., $\reals$ is complete, $\mathbb{Q}$ is not} \\
     & \qquad \text{may be \alert{infinite} dimensional, e.g., all $f:[0,1] \to \reals$ with a first derivative} \\
     \alert{\text{bounded }} & \text{means } \sup_{f \in V} \frac{\abs{\LIN(f)}}{\norm{f}} < \infty \text{ (automatic for finite dimensional $V$, but \hyperlink{lindisc}{\beamergotobutton{look here}})} \\
     & \qquad \text{linear $+$ bounded $\implies$ continuous, 
@@ -306,7 +307,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 		$
 		\INT : f \mapsto \int_{[0,1]^d} f(\vt) \, \dif \vt$ and $\AVG: f \mapsto \frac 1n \sum_{i=1}^n f(\vx_i)
 		$
-		 are bounded, linear real-valued functions.  \only<3->{Thus, so is $\ERR = \INT - \AVG$.  By the Reisz Representation Theorem, there exists an $\eta \in V$ such that
+		 are bounded, linear real-valued functions.  \only<3->{Thus, so is $\ERR = \INT - \AVG$.  By the Reisz Representation Theorem, there exists a \alert{representer} $\eta \in V$ such that
 		 $
 		 \int_{[0,1]^d} f(\vt) \, \dif \vt - \frac 1n \sum_{i=1}^n f(\vx_i)  = \ERR(f) = \ip{\eta}{f}
 		 $.}
@@ -328,7 +329,7 @@ so $h \in \ker(\LIN)$.  \uncover<5->{The choice of $g_\perp$ implies that
 \uncover<2->{Combining with the Riesz Reproduction Theorem
 \begin{gather*}
 	\ERR(f) := \int_{[0,1]^d} f(\vt) \, \dif \vt - \frac 1n \sum_{i=1}^n f(\vx_i) 
-	= \ip{\eta}{f}, \qquad \eta = ?\\
+	= \ip{\eta}{f}, \qquad \text{\alert{representer} } \eta = ?\\
 	\eta(\vx) \underbrace{=}_{\text{reproduction}} \ip{K(\cdot,\vx)}{\eta} \underbrace{=}_{\text{symmetry}}  \ip{\eta}{K(\cdot,\vx)} \underbrace{=}_{\text{representer}} \ERR\bigl(K(\cdot,\vx)\bigr) 
 	\uncover<3->{= \int_{[0,1]^d} K(\vt,\vx) \, \dif \vt- \frac 1n \sum_{i=1}^n K(\vx_i,\vx) \\
 		\uncover<4->{\norm{\eta}^2 = \ip{\eta}{\eta} \underbrace{=}_{\text{representer}} \ERR(\eta) 
